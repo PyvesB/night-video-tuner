@@ -1,0 +1,74 @@
+body {
+	padding: 2px;
+}
+
+div {
+	height: 35px;
+	user-select: none;
+	cursor: default;
+}
+
+input[type=image] {
+	outline-style: none;
+	vertical-align: middle;
+	margin-bottom: 2px;
+}
+
+input[type=range] {
+	-webkit-appearance: none;
+	width: 250px;
+	float: left;
+	cursor: pointer;
+}
+
+input[type=range]::-webkit-slider-runnable-track {
+	height: 6px;
+	background: #ddd;
+	border: none;
+	border-radius: 3px;
+}
+
+input[type=range]::-webkit-slider-thumb {
+	-webkit-appearance: none;
+	border: 2px solid #303030;
+	border-radius: 50%;
+	height: 14px;
+	width: 14px;
+	background: #778899;
+	margin-top: -4px;
+}
+
+input[type=range]:focus {
+	outline: none;
+}
+
+button {
+	text-align: center;
+	font-size: 12px;
+	margin: 4px 2px;
+	transition-duration: 0.3s;
+	cursor: pointer;
+	background-color: white;
+	border: 2px solid #e7e7e7;
+	border-radius: 5px;
+	height: 30px;
+	width: 121px;
+	outline-style: none;
+}
+
+button:hover {
+	filter: invert(0.15);
+}
+
+button span {
+	vertical-align: middle;
+}
+
+button img {
+	vertical-align: middle;
+}
+
+footer {
+	text-align: center;
+	margin-bottom: -6px;
+}

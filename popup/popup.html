@@ -1,0 +1,85 @@
+<!doctype html>
+<html>
+<head>
+<title>Adjust Video Properties</title>
+<link rel="stylesheet" href="popup.css">
+</head>
+<body>
+	<div>
+		<input id="reset_temperature" type="image" src="../icons/reset.png" />
+		Temperature: <input type="range" id="temperature" min="2000"
+			max="10000" value="6500" step="100" />
+		<output id="temperature_text">6500K</output>
+	</div>
+	<div>
+		<input id="reset_brightness" type="image" src="../icons/reset.png" />
+		Brightness: <input type="range" id="brightness" min="0" max="500"
+			value="100" step="10" />
+		<output id="brightness_text">100%</output>
+	</div>
+	<div>
+		<input id="reset_contrast" type="image" src="../icons/reset.png" />
+		Contrast: <input type="range" id="contrast" min="0" max="500"
+			value="100" step="10" />
+		<output id="contrast_text">100%</output>
+	</div>
+	<div>
+		<input id="reset_grayscale" type="image" src="../icons/reset.png" />
+		Grayscale: <input type="range" id="grayscale" min="0" max="100"
+			value="0" step="2" />
+		<output id="grayscale_text">0%</output>
+	</div>
+	<div>
+		<input id="reset_invert" type="image" src="../icons/reset.png" />
+		Invert: <input type="range" id="invert" min="0" max="100" value="0"
+			step="2" />
+		<output id="invert_text">0%</output>
+	</div>
+	<div>
+		<input id="reset_opacity" type="image" src="../icons/reset.png" />
+		Opacity: <input type="range" id="opacity" min="0" max="100"
+			value="100" step="2" />
+		<output id="opacity_text">100%</output>
+	</div>
+	<div>
+		<input id="reset_saturate" type="image" src="../icons/reset.png" />
+		Saturate: <input type="range" id="saturate" min="0" max="500"
+			value="100" step="10" />
+		<output id="saturate_text">100%</output>
+	</div>
+	<div>
+		<input id="reset_sepia" type="image" src="../icons/reset.png" />
+		Sepia: <input type="range" id="sepia" min="0" max="100" value="0"
+			step="2" />
+		<output id="sepia_text">0%</output>
+	</div>
+	<div>
+		<input id="reset_blur" type="image" src="../icons/reset.png" /> Blur:
+		<input type="range" id="blur" min="0" max="100" value="0" step="2" />
+		<output id="blur_text">0px</output>
+	</div>
+	<div>
+		<input id="reset_hue-rotate" type="image" src="../icons/reset.png" />
+		Hue-rotate: <input type="range" id="hue-rotate" min="0" max="360"
+			value="0" step="10" />
+		<output id="hue-rotate_text">0deg</output>
+	</div>
+	<button id="enable_disable">
+		<img src="../icons/onoff.png" /> <span id="enable_disable_span">Disable</span>
+	</button>
+	<button id="reset_all">
+		<img src="../icons/reset.png" /> <span>Reset All</span>
+	</button>
+	<button id="website">
+		<img src="../icons/website.png" /> <span>Website</span>
+	</button>
+	<button id="reviews">
+		<img src="../icons/reviews.png" /> <span>Reviews</span>
+	</button>
+	<script type="text/javascript" src="../filters/filters.js"></script>
+	<script type="text/javascript" src="popup.js"></script>
+</body>
+<footer>
+	<span><b>Night Video Tuner - <a href="https://github.com/PyvesB/NightVideoTuner/releases">v1.0.0</a></b></span>
+</footer>
+</html>

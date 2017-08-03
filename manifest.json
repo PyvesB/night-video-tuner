@@ -1,0 +1,40 @@
+{
+	"name": "Night Video Tuner",
+	"version": "1.0.0",
+	"description": "Protect your eyes and improve your sleeping cycles by adjusting video temperature and many other properties!",
+	"background": {
+		"scripts": [
+			"background/background.js"
+		],
+		"persistent": false
+	},
+	"browser_action": {
+		"default_title": "Adjust video properties.",
+		"default_icon": "icons/icon-pause.png",
+		"default_popup": "popup/popup.html"
+	},
+	"content_scripts": [
+		{
+			"all_frames": true,
+			"matches": [
+				"<all_urls>"
+			],
+			"js": [
+				"filters/filters.js",
+				"content/content.js"
+			]
+		}
+	],
+	"permissions": [
+		"storage",
+		"notifications",
+		"management",
+		"tabs",
+		"<all_urls>"
+	],
+	"icons": {
+		"48": "icons/icon-medium.png",
+		"128": "icons/icon-large.png"
+	},
+	"manifest_version": 2
+}
