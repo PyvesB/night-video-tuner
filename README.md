@@ -3,9 +3,10 @@
 **Protect your eyes and improve your sleeping cycles by adjusting video temperature and many other properties!**
 
 <p align="center" style="font-size:5px;">
-<img src ="http://images.jupload.fr/1502032921.png" width="300" />
-<img src ="http://images.jupload.fr/1502032952.png" width="300" />
-<img src ="http://images.jupload.fr/1502032972.png" width="300" />
+<img src ="http://images.jupload.fr/1502032921.png" width="400" />
+<br />
+<img src ="http://images.jupload.fr/1502032952.png" width="400" />
+<img src ="http://images.jupload.fr/1502032972.png" width="400" />
 <br />
 <i><sub>A few examples of the extension being used!</sub></i>
 
