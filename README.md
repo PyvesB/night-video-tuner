@@ -3,9 +3,9 @@
 **Protect your eyes and improve your sleeping cycles by adjusting video temperature and many other properties!**
 
 <p align="center" style="font-size:5px;">
-<img src ="http://images.jupload.fr/1501791893.png" width="400" />
-<img src ="http://images.jupload.fr/1501791736.png" width="400" />
-<img src ="http://images.jupload.fr/1501791915.png" width="400" />
+<img src ="http://images.jupload.fr/1502032921.png" width="300" />
+<img src ="http://images.jupload.fr/1502032952.png" width="300" />
+<img src ="http://images.jupload.fr/1502032972.png" width="300" />
 <br />
 <i><sub>A few examples of the extension being used!</sub></i>
 
@@ -16,10 +16,10 @@ ___
 ### Main features
 
 * Adjust video temperature to filter out blue light before sleep, which can distort your circadian rhythm according to recent research.
-* Modify 9 other video properties for a more comfortable viewing experience at night (brightness, contrast, saturation, etc.).
+* Modify 9 other properties to reduce eye strain and enjoy a more comfortable viewing experience.
 * Tweak the settings the other way around for bright environments.
-* Use the extension on HTML5 players, such as Youtube, Netflix, BBC iPlayer, Dailymotion and many more.
-* Enable, disable and change settings on the fly.
+* Use the extension on all major players, such as Youtube, Netflix, BBC iPlayer, Dailymotion and many more.
+* Enable, disable and change filters on the fly.
 * Nice and user-friendly interface.
 * No user tracking, no ads.
 * Source code available.
@@ -27,6 +27,13 @@ ___
 
 Check out what's new in the [latest releases](https://github.com/PyvesB/NightVideoTuner/releases) or open an [issue](https://github.com/PyvesB/NightVideoTuner/issues) to request additional features!
 
+___
+
+### Installation
+
+If you are using Chrome, simply navigate to the [Chrome Web Store](https://chrome.google.com/webstore/detail/night-video-tuner/ogffaloegjglncjfehdfplabnoondfjo) and click *Add to Chrome* on the top right of the window.
+
+The extension will be installed automatically and should not require a browser restart in order to be used.
 
 ___
 
