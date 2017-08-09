@@ -17,14 +17,13 @@ ___
 ### Main features
 
 * Adjust video temperature to filter out blue light before sleep, which can distort your circadian rhythm according to recent research.
-* Modify 9 other properties to reduce eye strain and enjoy a more comfortable viewing experience.
-* Tweak the settings the other way around for bright environments.
-* Use the extension on all major players, such as Youtube, Netflix, BBC iPlayer, Dailymotion and many more.
-* Enable, disable and change filters on the fly.
+* Apply 9 other filters to reduce eye strain and enjoy a better viewing experience: brightness, contrast, grayscale, invert, opacity, saturate, sepia, blur and hue-rotate.
+* Tweak the video settings the other way around for bright environments.
+* Use on all HTML5 video players: Youtube, Netflix, BBC iPlayer, Vimeo and more!
+* Enable, disable and adjust filters on the fly.
 * Nice and user-friendly interface.
 * No user tracking, no ads.
-* Source code available.
-* More to discover and to come in future updates!
+* Source code fully available.
 
 Check out what's new in the [latest releases](https://github.com/PyvesB/NightVideoTuner/releases) or open an [issue](https://github.com/PyvesB/NightVideoTuner/issues) to request additional features!
 
@@ -32,7 +31,7 @@ ___
 
 ### Installation
 
-Simply navigate to the [Chrome Web Store](https://chrome.google.com/webstore/detail/night-video-tuner/ogffaloegjglncjfehdfplabnoondfjo) if you are using Chrome or to the [Opera Add-Ons Store](https://addons.opera.com/extensions/details/night-video-tuner) if you are using Opera. 
+Simply navigate to the ![Chrome](http://images.jupload.fr/1502307545.png) [Chrome Web Store](https://chrome.google.com/webstore/detail/night-video-tuner/ogffaloegjglncjfehdfplabnoondfjo) if you are using Chrome or to the ![Opera](http://images.jupload.fr/1502307420.png) [Opera Add-Ons Store](https://addons.opera.com/extensions/details/night-video-tuner) if you are using Opera. 
 
 Click on the install button on the top right of the window. The extension will be installed automatically and should not require a browser restart in order to be used.
 
