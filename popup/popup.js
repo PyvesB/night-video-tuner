@@ -86,7 +86,7 @@ function visitWebsite() {
 
 function visitReviews() {
 	if (!!window.opera || navigator.userAgent.indexOf(' OPR/') >= 0) {
-		window.open("https://addons.opera.com/fr/extensions/details/night-video-tuner");
+		window.open("https://addons.opera.com/extensions/details/night-video-tuner");
 	} else {
 		window.open("https://chrome.google.com/webstore/detail/night-video-tuner/ogffaloegjglncjfehdfplabnoondfjo");
 	}
