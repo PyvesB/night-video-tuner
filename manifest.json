@@ -28,9 +28,9 @@
 	"permissions": [
 		"storage",
 		"notifications",
-		"management",
 		"tabs",
-		"<all_urls>"
+		"http://*/*",
+		"https://*/*"
 	],
 	"icons": {
 		"48": "icons/icon-medium.png",
