@@ -40,9 +40,9 @@ chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
 function executeScriptsAndNotifyAllTabs() {
 	chrome.tabs.query({}, function(tabs) {
 		tabs.forEach(function(tab) {
-			// Executing a content script on a chrome:// is not allowed and
-			// would throw an exception.
-			if (!tab.url.startsWith("chrome://")) {
+			// Executing a content script on chrome://, ftp:// or file:// URLs
+			// is not allowed and would throw exceptions.
+			if (!tab.url.startsWith("chrome://") && !tab.url.startsWith("ftp://") && !tab.url.startsWith("file://")) {
 				chrome.tabs.executeScript(tab.id, {
 					allFrames : true,
 					file : "filters/filters.js"
