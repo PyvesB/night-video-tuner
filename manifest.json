@@ -5,6 +5,7 @@
 	"author": "PyvesB",
 	"homepage_url": "https://github.com/PyvesB/NightVideoTuner",
 	"default_locale": "en",
+	"offline_enabled": true,
 	"background": {
 		"scripts": [
 			"background/background.js"
