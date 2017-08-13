@@ -19,7 +19,8 @@
 		{
 			"all_frames": true,
 			"matches": [
-				"<all_urls>"
+				"http://*/*",
+				"https://*/*"
 			],
 			"js": [
 				"filters/filters.js",
