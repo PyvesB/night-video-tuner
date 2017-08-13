@@ -5,8 +5,8 @@ chrome.runtime.onInstalled.addListener(function(details) {
 	executeScriptsAndNotifyAllTabs();
 	if (details.reason === "update") {
 		chrome.notifications.create("update_notification", {
-			title : "Night Video Tuner Update",
-			message : "Extension updated to version " + chrome.runtime.getManifest().version,
+			title : chrome.i18n.getMessage("update_title"),
+			message : chrome.i18n.getMessage("update_message", [ chrome.runtime.getManifest().version ]),
 			type : "basic",
 			iconUrl : "icons/icon-large.png"
 		})

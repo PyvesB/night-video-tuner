@@ -1,0 +1,65 @@
+{
+	"manifest_description": {
+		"message": "Protect your eyes and improve your sleeping cycles by adjusting video temperature and many other properties!"
+	},
+	"update_title": {
+		"message": "Night Video Tuner Update"
+	},
+	"update_message": {
+		"message": "Extension updated to version $VERSION$",
+		"placeholders": {
+			"version": {
+				"content": "$1",
+				"example": "1.0.0"
+			}
+		}
+	},
+	"adjust_video_properties": {
+		"message": "Adjust Video Properties"
+	},
+	"temperature": {
+		"message": " Temperature: "
+	},
+	"brightness": {
+		"message": " Brightness: "
+	},
+	"contrast": {
+		"message": " Contrast: "
+	},
+	"grayscale": {
+		"message": " Grayscale: "
+	},
+	"invert": {
+		"message": " Invert: "
+	},
+	"opacity": {
+		"message": " Opacity: "
+	},
+	"saturate": {
+		"message": " Saturate: "
+	},
+	"sepia": {
+		"message": " Sepia: "
+	},
+	"blur": {
+		"message": " Blur:"
+	},
+	"hue_rotate": {
+		"message": " Hue-rotate: "
+	},
+	"disable": {
+		"message": "Disable"
+	},
+	"enable": {
+		"message": "Enable"
+	},
+	"reset_all": {
+		"message": "Reset All"
+	},
+	"website": {
+		"message": "Website"
+	},
+	"reviews": {
+		"message": "Reviews"
+	}
+}
