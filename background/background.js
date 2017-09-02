@@ -1,3 +1,6 @@
+// Disable logging when used in production.
+console.log = function(){};
+
 // Notifies tabs when the extension is installed or updated, and displays an
 // update notification. All tabs execute their content script and check for
 // videos, which avoids having to reload them or restart the browser.
@@ -48,7 +51,7 @@ function executeScriptsAndNotifyAllTabs() {
 					file : "filters/filters.js"
 				}, function() {
 					if (typeof chrome.runtime.lastError !== "undefined") {
-						console.log("Could not execute script in tab with url " + tab.url);
+						console.warn("Could not execute Night Video Tuner script in tab with url " + tab.url);
 					} else {
 						chrome.tabs.executeScript(tab.id, {
 							allFrames : true,

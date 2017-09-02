@@ -1,3 +1,6 @@
+// Disable logging when used in production.
+console.log = function(){};
+
 // Add listeners to the different buttons in the popup.
 document.getElementById("reset_all").addEventListener("click", resetAll);
 document.getElementById("enable_disable").addEventListener("click", enableDisable);
