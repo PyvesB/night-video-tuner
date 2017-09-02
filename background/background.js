@@ -23,7 +23,7 @@ chrome.tabs.onUpdated.addListener(function(tabId, changeInfo, tab) {
 
 // Modifies the tab icon when a tab containing a video notifies the background
 // that the video tuning has been enabled or disabled.
-chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
+chrome.runtime.onMessage.addListener(function(request, sender) {
 	if (request.state === "disabled") {
 		chrome.browserAction.setIcon({
 			path : "icons/icon-pause.png",
@@ -46,14 +46,14 @@ function executeScriptsAndNotifyAllTabs() {
 				chrome.tabs.executeScript(tab.id, {
 					allFrames : true,
 					file : "filters/filters.js"
-				}, function(result) {
+				}, function() {
 					if (typeof chrome.runtime.lastError !== "undefined") {
 						console.log("Could not execute script in tab with url " + tab.url);
 					} else {
 						chrome.tabs.executeScript(tab.id, {
 							allFrames : true,
 							file : "content/content.js"
-						}, function(result) {
+						}, function() {
 							notifyTab(tab.id);
 						});
 					}

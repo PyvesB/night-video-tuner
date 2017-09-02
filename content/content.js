@@ -18,7 +18,7 @@ chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
 		// Indicate to the background that the message response will be sent
 		// asynchronously.
 		return true;
-	} else if (videoDetected && document.getElementsByTagName("video").length == 0) {
+	} else if (videoDetected && document.getElementsByTagName("video").length === 0) {
 		videoDetected = false;
 		// No more video: do not react to subsequent storage changes.
 		chrome.storage.onChanged.removeListener(handleStorageChanges);
@@ -28,42 +28,49 @@ chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
 	}
 });
 
-function handleStorageChanges(changes, namespace) {
+function handleStorageChanges(changes) {
 	Object.keys(changes).forEach(function(key) {
 		if (key === "state") {
-			if (changes[key].newValue === "disabled") {
-				disableAllVideoFilters();
-				// Notify background so that tab icon is changed to pause.
-				chrome.runtime.sendMessage({
-					state : "disabled"
-				});
-			} else {
-				updateAllVideoFilters();
-				// Notify background so that tab icon is changed to play.
-				chrome.runtime.sendMessage({
-					state : "enabled"
-				});
-			}
+			handleStateChange(changes[key].newValue);
 		} else {
-			chrome.storage.local.get("state", function(value) {
-				if (value["state"] !== "disabled") {
-					var newValue = changes[key].newValue;
-					if (key === "temperature") {
-						if (DEFAULT_VALUES[key] !== newValue) {
-							updateVideoTemperature(newValue);
-						} else {
-							// Temperature has default value: remove url filter
-							// from HTML.
-							removeVideoFilter("url");
-						}
-					} else if (DEFAULT_VALUES[key] !== newValue) {
-						updateVideoFilter(key, newValue + FILTERS[key]);
-					} else {
-						// Filter has default value: remove it from HTML.
-						removeVideoFilter(key);
-					}
+			handleFilterChange(key, changes[key].newValue);
+		}
+	});
+}
+
+function handleStateChange(newState) {
+	if (newState === "disabled") {
+		disableAllVideoFilters();
+		// Notify background so that tab icon is changed to pause.
+		chrome.runtime.sendMessage({
+			state : "disabled"
+		});
+	} else {
+		updateAllVideoFilters();
+		// Notify background so that tab icon is changed to play.
+		chrome.runtime.sendMessage({
+			state : "enabled"
+		});
+	}
+}
+
+function handleFilterChange(key, newValue) {
+	chrome.storage.local.get("state", function(value) {
+		if (value["state"] !== "disabled") {
+			if (key === "temperature") {
+				if (DEFAULT_VALUES[key] !== newValue) {
+					updateVideoTemperature(newValue);
+				} else {
+					// Temperature has default value: remove url filter
+					// from HTML.
+					removeVideoFilter("url");
 				}
-			});
+			} else if (DEFAULT_VALUES[key] !== newValue) {
+				updateVideoFilter(key, newValue + FILTERS[key]);
+			} else {
+				// Filter has default value: remove it from HTML.
+				removeVideoFilter(key);
+			}
 		}
 	});
 }
