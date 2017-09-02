@@ -43,6 +43,8 @@ chrome.storage.local.get("state", function(value) {
 document.getElementById("reset_all_text").innerHTML = chrome.i18n.getMessage("reset_all");
 document.getElementById("website_text").innerHTML = chrome.i18n.getMessage("website");
 document.getElementById("reviews_text").innerHTML = chrome.i18n.getMessage("reviews");
+// Display version number.
+document.getElementById("version").innerHTML = "v" + chrome.runtime.getManifest().version;
 
 function updateFilterValue() {
 	var filter = this.id;
