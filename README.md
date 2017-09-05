@@ -17,12 +17,12 @@ ___
 ### Main features
 
 * Adjust video temperature to filter out blue light before sleep, which can distort your circadian rhythm according to recent research.
-* Apply 9 other filters to reduce eye strain and enjoy a better night viewing experience: brightness, contrast, grayscale, invert, opacity, saturate, sepia, blur and hue.
-* Tweak the video settings the other way around for bright environments.
+* Control 9 other filters to reduce eye strain and enjoy a better night viewing experience: brightness, contrast, grayscale, invert, opacity, saturate, sepia, blur and hue.
+* Adjust video settings the other way around for bright environments.
 * Use on all HTML5 video players: Youtube, Netflix, BBC iPlayer, Vimeo and more!
-* Enable, disable and adjust filters on the fly.
+* Enable, disable and manage filters on the fly.
 * Nice and user-friendly interface.
-* No user tracking, no ads.
+* Free, no user tracking, no ads.
 * Available in English and French.
 * Source code fully available.
 
