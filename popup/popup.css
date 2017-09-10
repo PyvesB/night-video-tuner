@@ -3,9 +3,13 @@ body {
 }
 
 div {
-	height: 35px;
+	font-family: sans-serif;
+	font-size: 12px;
 	user-select: none;
+	-moz-user-select: none;
 	cursor: default;
+	height: 35px;
+	float: left;
 }
 
 input[type=image] {
@@ -16,12 +20,23 @@ input[type=image] {
 
 input[type=range] {
 	-webkit-appearance: none;
+	-moz-appearance: none;
 	width: 250px;
-	float: left;
+	vertical-align: middle;
+	margin-top: -4px;
+	margin-left: 2px;
+	margin-right: 2px;
 	cursor: pointer;
 }
 
 input[type=range]::-webkit-slider-runnable-track {
+	height: 6px;
+	background: #ddd;
+	border: none;
+	border-radius: 3px;
+}
+
+input[type=range]::-moz-range-track {
 	height: 6px;
 	background: #ddd;
 	border: none;
@@ -38,12 +53,23 @@ input[type=range]::-webkit-slider-thumb {
 	margin-top: -4px;
 }
 
+input[type=range]::-moz-range-thumb {
+	-moz-appearance: none;
+	border: 2px solid #303030;
+	border-radius: 50%;
+	height: 10px;
+	width: 10px;
+	background: #778899;
+	margin-top: -4px;
+}
+
 input[type=range]:focus {
 	outline: none;
 }
 
 button {
 	text-align: center;
+	font-family: sans-serif;
 	font-size: 12px;
 	margin: 4px 2px;
 	transition-duration: 0.3s;
@@ -70,5 +96,7 @@ button img {
 
 footer {
 	text-align: center;
-	margin-bottom: -6px;
+	font-family: sans-serif;
+	font-size: 12px;
+	margin-bottom: -8px;
 }
