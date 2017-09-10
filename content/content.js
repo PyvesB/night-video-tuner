@@ -153,7 +153,7 @@ function updateVideoFilter(video, filter, value) {
 		// No current filters.
 		newFilters = filter + "(" + value + ")";
 		if (typeof video.style === "undefined") {
-			video.setProperty("style", "", "");
+			video.setAttribute("style", "");
 		}
 	}
 	video.style.setProperty("filter", newFilters, "");
