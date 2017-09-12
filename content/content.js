@@ -179,19 +179,15 @@ function updateVideoTemperature(video, value) {
 	}
 	var newFilter = document.createElementNS("http://www.w3.org/2000/svg", "svg");
 	newFilter.classList.add("temperature_svg");
-	var filterStyle = "";
-	if (typeof InstallTrigger !== 'undefined') {
-		// Workaround for Firefox bug 376027.
-		newFilter.setAttribute("width", "0");
-		newFilter.setAttribute("height", "0");
-	} else {
-		filterStyle = " style=\"display: none;\"";
-	}
+	// Workaround to prevent the SVG from interfering with the layout.
+	newFilter.setAttribute("width", "0");
+	newFilter.setAttribute("height", "0");
+	newFilter.setAttribute("style", "position: absolute; left: -999");
 	// Functions to compute RGB components from a given temperature written
 	// using: www.tannerhelland.com/4435/convert-temperature-rgb-algorithm-code
-	newFilter.innerHTML = "<filter id=\"temperature_filter\"" + filterStyle + "><feColorMatrix type=\"matrix\" "
-			+ "values=\"" + computeRed(temperature) + " 0 0 0 0 0 " + computeGreen(temperature) + " 0 0 0 0 0 "
-			+ computeBlue(temperature) + " 0 0 0 0 0 1 0\"/></filter>";
+	newFilter.innerHTML = "<filter id=\"temperature_filter\" color-interpolation-filters=\"sRGB\">"
+			+ "<feColorMatrix type=\"matrix\" values=\"" + computeRed(temperature) + " 0 0 0 0 0 "
+			+ computeGreen(temperature) + " 0 0 0 0 0 " + computeBlue(temperature) + " 0 0 0 0 0 1 0\"/></filter>";
 	// Append HTML temperature element as a child of the video.
 	video.parentNode.appendChild(newFilter);
 	// Update filters so it uses the temperature svg.
