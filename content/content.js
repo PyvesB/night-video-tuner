@@ -18,8 +18,9 @@ function checkForVideos() {
 				}
 			}
 			Array.prototype.slice.call(videos).forEach(function(video) {
-				// Add class and set filters if video found for the first time.
-				if (!video.classList.contains("night_video_tuner")) {
+				// Add class and set filters if video found for the first time
+				// or if style removed (players such as Netflix do this).
+				if (!video.classList.contains("night_video_tuner") || !video.hasAttribute("style")) {
 					video.classList.add("night_video_tuner");
 					if (enabled) {
 						updateAllVideoFilters(video);
@@ -120,8 +121,11 @@ function disableAllVideoFilters(video) {
 }
 
 function updateAllVideoFilters(video) {
-	// Get all storage elements and match the relevant ones with our video
-	// filters.
+	if (!video.hasAttribute("style")) {
+		// Prepare style atribute for upcoming population.
+		video.setAttribute("style", "");
+	}
+	// Get all storage elements and match relevant ones with our video filters.
 	chrome.storage.local.get(null, function(value) {
 		Object.keys(FILTERS).forEach(function(filter) {
 			var filterValue = value[filter];
@@ -139,7 +143,7 @@ function updateAllVideoFilters(video) {
 
 function updateVideoFilter(video, filter, value) {
 	var newFilters;
-	if (typeof video.style !== "undefined" && typeof video.style.filter !== "undefined") {
+	if (typeof video.style.filter !== "undefined") {
 		var currentFilters = video.style.filter;
 		var regex = RegExp(filter + "\\(([0-9]*" + FILTERS[filter] + "|\"#temperature_filter\")\\)");
 		if (regex.test(currentFilters)) {
@@ -152,9 +156,6 @@ function updateVideoFilter(video, filter, value) {
 	} else {
 		// No current filters.
 		newFilters = filter + "(" + value + ")";
-		if (typeof video.style === "undefined") {
-			video.setAttribute("style", "");
-		}
 	}
 	video.style.setProperty("filter", newFilters, "");
 }
