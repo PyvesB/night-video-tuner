@@ -173,24 +173,30 @@ function removeVideoFilter(video, filter) {
 
 function updateVideoTemperature(video, value) {
 	var temperature = value / 100;
-	var previousFilters = document.getElementsByClassName("temperature_svg");
+	var previousSVGs = document.getElementsByClassName("temperature_svg");
 	// Remove previous HTML temperature element. At most one element expected.
-	while (previousFilters[0]) {
-		previousFilters[0].parentNode.removeChild(previousFilters[0]);
+	while (previousSVGs[0]) {
+		previousSVGs[0].parentNode.removeChild(previousSVGs[0]);
 	}
-	var newFilter = document.createElementNS("http://www.w3.org/2000/svg", "svg");
-	newFilter.classList.add("temperature_svg");
-	// Workaround to prevent the SVG from interfering with the layout.
-	newFilter.setAttribute("width", "0");
-	newFilter.setAttribute("height", "0");
-	newFilter.setAttribute("style", "position: absolute; left: -999");
+	var feColorMatrix = document.createElementNS("http://www.w3.org/2000/svg", "feColorMatrix");
+	feColorMatrix.setAttribute("type", "matrix");
 	// Functions to compute RGB components from a given temperature written
 	// using: www.tannerhelland.com/4435/convert-temperature-rgb-algorithm-code
-	newFilter.innerHTML = "<filter id=\"temperature_filter\" color-interpolation-filters=\"sRGB\">"
-			+ "<feColorMatrix type=\"matrix\" values=\"" + computeRed(temperature) + " 0 0 0 0 0 "
-			+ computeGreen(temperature) + " 0 0 0 0 0 " + computeBlue(temperature) + " 0 0 0 0 0 1 0\"/></filter>";
+	feColorMatrix.setAttribute("values", computeRed(temperature) + " 0 0 0 0 0 " + computeGreen(temperature)
+			+ " 0 0 0 0 0 " + computeBlue(temperature) + " 0 0 0 0 0 1 0");
+	var filter = document.createElementNS("http://www.w3.org/2000/svg", "filter");
+	filter.setAttribute("id", "temperature_filter");
+	filter.setAttribute("color-interpolation-filters", "sRGB");
+	filter.appendChild(feColorMatrix);
+	var newSVG = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+	newSVG.classList.add("temperature_svg");
+	// Workaround to prevent the SVG from interfering with the layout.
+	newSVG.setAttribute("width", "0");
+	newSVG.setAttribute("height", "0");
+	newSVG.setAttribute("style", "position: absolute; left: -999");
+	newSVG.appendChild(filter);
 	// Append HTML temperature element as a child of the video.
-	video.parentNode.appendChild(newFilter);
+	video.parentNode.appendChild(newSVG);
 	// Update filters so it uses the temperature svg.
 	updateVideoFilter(video, "url", "#temperature_filter");
 }
