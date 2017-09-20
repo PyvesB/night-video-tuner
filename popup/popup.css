@@ -50,7 +50,7 @@ input[type=range]::-webkit-slider-thumb {
 	border-radius: 50%;
 	height: 14px;
 	width: 14px;
-	background: #778899;
+	background: #acacac;
 	margin-top: -4px;
 }
 
@@ -61,7 +61,7 @@ input[type=range]::-moz-range-thumb {
 	border-radius: 50%;
 	height: 14px;
 	width: 14px;
-	background: #778899;
+	background: #acacac;
 	margin-top: -4px;
 }
 
@@ -109,5 +109,5 @@ footer {
 }
 
 a, a:visited, a:hover, a:active {
-	color: #778899;
+	color: #818181;
 }
