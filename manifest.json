@@ -27,7 +27,8 @@
 			"js": [
 				"filters/filters.js",
 				"content/content.js"
-			]
+			],
+			"run_at": "document_end"
 		}
 	],
 	"permissions": [
