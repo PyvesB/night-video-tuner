@@ -32,7 +32,7 @@ ___
 
 ### Installation
 
-Simply navigate to the ![Chrome](http://images.jupload.fr/1502307545.png) [Chrome Web Store](https://chrome.google.com/webstore/detail/night-video-tuner/ogffaloegjglncjfehdfplabnoondfjo) if you are using Chrome or to the ![Opera](http://images.jupload.fr/1502307420.png) [Opera Add-Ons Store](https://addons.opera.com/extensions/details/night-video-tuner) if you are using Opera. 
+Simply navigate to the ![Chrome](http://images.jupload.fr/1502307545.png) [Chrome Web Store](https://chrome.google.com/webstore/detail/night-video-tuner/ogffaloegjglncjfehdfplabnoondfjo) if you are using Chrome, to the ![Opera](http://images.jupload.fr/1502307420.png) [Opera Add-Ons Store](https://addons.opera.com/extensions/details/night-video-tuner) if you are using Opera or to the ![Firefox](http://images.jupload.fr/1506028278.png) [Firefox Add-Ons Store](https://addons.mozilla.org/firefox/addon/night-video-tuner) if you are using Firefox. 
 
 Click on the install button on the top right of the window. The extension will be installed automatically and should not require a browser restart in order to be used.
 
