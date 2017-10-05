@@ -1,6 +1,6 @@
 {
 	"manifest_description": {
-		"message": "Protégez vos yeux et améliorez vos cycles de sommeil en ajustant la température ainsi que d'autres propriétes de vos vidéos !"
+		"message": "Protégez vos yeux et améliorez vos cycles de sommeil en ajustant la température ainsi que d'autres propriétés de vos vidéos !"
 	},
 	"update_title": {
 		"message": "Mise à jour de Night Video Tuner"
@@ -15,7 +15,7 @@
 		}
 	},
 	"adjust_video_properties": {
-		"message": "Ajuster Propriétés Vidéo"
+		"message": "Réglage des Filtres"
 	},
 	"temperature": {
 		"message": " Température : "
@@ -42,7 +42,7 @@
 		"message": " Sépia : "
 	},
 	"blur": {
-		"message": " Flou :"
+		"message": " Flou : "
 	},
 	"hue_rotate": {
 		"message": " Teinte : "

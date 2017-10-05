@@ -15,7 +15,7 @@
 		}
 	},
 	"adjust_video_properties": {
-		"message": "Adjust Video Properties"
+		"message": "Tune Video Filters"
 	},
 	"temperature": {
 		"message": " Temperature: "
@@ -42,7 +42,7 @@
 		"message": " Sepia: "
 	},
 	"blur": {
-		"message": " Blur:"
+		"message": " Blur: "
 	},
 	"hue_rotate": {
 		"message": " Hue-rotate: "
@@ -57,7 +57,7 @@
 		"message": "Reset All"
 	},
 	"website": {
-		"message": "Website"
+		"message": "Homepage"
 	},
 	"reviews": {
 		"message": "Reviews"
