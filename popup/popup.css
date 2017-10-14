@@ -25,6 +25,10 @@ input[type=range] {
 	cursor: pointer;
 }
 
+input[type=range]::-moz-focus-outer {
+	border: 0;
+}
+
 input[type=range]::-webkit-slider-runnable-track {
 	height: 6px;
 	background: #ddd;
@@ -62,23 +66,27 @@ input[type=range]::-moz-range-thumb {
 }
 
 input[type=range]:focus {
-	outline: none;
+	outline-style: none;
 }
 
 button {
+	outline-style: none;
+	cursor: pointer;
 	text-align: center;
 	font-family: sans-serif;
 	font-size: 12px;
 	margin-left: 3px;
 	margin-bottom: 7px;
-	cursor: pointer;
 	background-color: white;
 	box-sizing: border-box;
 	border: 2px solid #e7e7e7;
 	border-radius: 5px;
 	height: 31px;
 	width: 121px;
-	outline-style: none;
+}
+
+button::-moz-focus-inner {
+	border: 0;
 }
 
 button:hover {
