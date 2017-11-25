@@ -17,16 +17,7 @@ function checkForVideos() {
 					});
 				}
 			}
-			Array.prototype.slice.call(videos).forEach(function(video) {
-				// Add class and set filters if video found for the first time
-				// or if style removed (players such as Netflix do this).
-				if (!video.classList.contains("night_video_tuner") || !video.hasAttribute("style")) {
-					video.classList.add("night_video_tuner");
-					if (enabled) {
-						updateAllVideoFilters(video);
-					}
-				}
-			});
+			updateUnprocessedVideos(videos, enabled);
 		});
 	} else if (videoDetected) {
 		// A video was previously detected, but there aren't any now.
@@ -43,6 +34,19 @@ function checkForVideos() {
 }
 // Execute first check for videos.
 checkForVideos();
+
+function updateUnprocessedVideos(videos, enabled) {
+  Array.prototype.slice.call(videos).forEach(function(video) {
+    // Add class and set filters if video found for the first time or if style
+    // removed (players such as Netflix do this).
+    if (!video.classList.contains("night_video_tuner") || !video.hasAttribute("style")) {
+      video.classList.add("night_video_tuner");
+      if (enabled) {
+        updateAllVideoFilters(video);
+      }
+    }
+  });
+}
 
 function listExtensionVideos() {
 	return Array.prototype.slice.call(document.getElementsByClassName("night_video_tuner"));
