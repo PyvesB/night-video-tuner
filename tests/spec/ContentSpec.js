@@ -32,50 +32,28 @@ describe("Content script", function() {
     });
 
     it("should do nothing if no videos are detected and none previously were", function() {
-      videoDetected = false;
-
       checkForVideos();
 
       expect(chrome.storage.local.get.notCalled).toBeTruthy();
-      expect(videoDetected).toBeFalsy();
+      expect(chrome.storage.onChanged.addListener.notCalled).toBeTruthy();
       expect(chrome.storage.onChanged.removeListener.notCalled).toBeTruthy();
       expect(chrome.runtime.sendMessage.notCalled).toBeTruthy();
     });
 
     it("should remove listener and notify background if all previsouly detected videos are gone", function() {
-      videoDetected = true;
+      chrome.storage.onChanged.addListener(handleStorageChanges);
 
       checkForVideos();
 
       expect(chrome.storage.local.get.notCalled).toBeTruthy();
       expect(chrome.storage.onChanged.removeListener.calledOnce).toBeTruthy();
-      expect(videoDetected).toBeFalsy();
       expect(chrome.runtime.sendMessage.withArgs({
         active : false
       }).calledOnce).toBeTruthy();
     });
 
-    it("should update unprocessed videos if some videos were previsouly detected", function() {
-      document.body.appendChild(video);
-      videoDetected = true;
-      chrome.storage.local.get.withArgs("state").yields({
-        state : "enabled"
-      });
-      spyOn(window, "updateUnprocessedVideos");
-
-      checkForVideos();
-
-      expect(chrome.storage.local.get.calledOnce).toBeTruthy();
-      expect(videoDetected).toBeTruthy();
-      expect(chrome.storage.onChanged.addListener.notCalled).toBeTruthy();
-      expect(chrome.runtime.sendMessage.notCalled).toBeTruthy();
-      expect(window.updateUnprocessedVideos.calls.mostRecent().args[0][0]).toEqual(video);
-      expect(window.updateUnprocessedVideos.calls.mostRecent().args[1]).toBeTruthy();
-    });
-
     it("should add listener and update unprocessed videos if videos detected for the first time, but not notify background if extension disabled", function() {
       document.body.appendChild(video);
-      videoDetected = false;
       chrome.storage.local.get.withArgs("state").yields({
         state : "disabled"
       });
@@ -84,7 +62,6 @@ describe("Content script", function() {
       checkForVideos();
 
       expect(chrome.storage.local.get.calledOnce).toBeTruthy();
-      expect(videoDetected).toBeTruthy();
       expect(chrome.storage.onChanged.addListener.calledOnce).toBeTruthy();
       expect(chrome.runtime.sendMessage.notCalled).toBeTruthy();
       expect(window.updateUnprocessedVideos.calls.mostRecent().args[0][0]).toEqual(video);
@@ -93,7 +70,6 @@ describe("Content script", function() {
 
     it("should add listener, update unprocessed videos and notify background if videos detected for the first time and extension enabled", function() {
       document.body.appendChild(video);
-      videoDetected = false;
       chrome.storage.local.get.withArgs("state").yields({
         state : "enabled"
       });
@@ -102,7 +78,6 @@ describe("Content script", function() {
       checkForVideos();
 
       expect(chrome.storage.local.get.calledOnce).toBeTruthy();
-      expect(videoDetected).toBeTruthy();
       expect(chrome.storage.onChanged.addListener.calledOnce).toBeTruthy();
       expect(chrome.runtime.sendMessage.withArgs({
         active : true
@@ -110,6 +85,23 @@ describe("Content script", function() {
       expect(window.updateUnprocessedVideos.calls.mostRecent().args[0][0]).toEqual(video);
       expect(window.updateUnprocessedVideos.calls.mostRecent().args[1]).toBeTruthy();
     });
+    
+    it("should update unprocessed videos but not notify background if some videos were previsouly detected", function() {
+      document.body.appendChild(video);
+      chrome.storage.onChanged.addListener(handleStorageChanges);
+      chrome.storage.local.get.withArgs("state").yields({
+        state : "enabled"
+      });
+      spyOn(window, "updateUnprocessedVideos");
+
+      checkForVideos();
+
+      expect(chrome.storage.local.get.calledOnce).toBeTruthy();
+      expect(chrome.runtime.sendMessage.notCalled).toBeTruthy();
+      expect(window.updateUnprocessedVideos.calls.mostRecent().args[0][0]).toEqual(video);
+      expect(window.updateUnprocessedVideos.calls.mostRecent().args[1]).toBeTruthy();
+    });
+
   });
 
   describe("Update unprocessed videos", function() {

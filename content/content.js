@@ -1,4 +1,3 @@
-var videoDetected = false;
 var videoChecker;
 
 function checkForVideos() {
@@ -6,9 +5,9 @@ function checkForVideos() {
   if (videos.length > 0) {
     chrome.storage.local.get("state", function(value) {
       const enabled = (value["state"] !== "disabled");
-      if (!videoDetected) {
-        // A video was detected, previously none were.
-        videoDetected = true;
+      // Check whether video previously detected (i.e. already listening to
+      // storage changes).
+      if (!chrome.storage.onChanged.hasListener(handleStorageChanges)) {
         // Listen to changes to the storage made by the popup.
         chrome.storage.onChanged.addListener(handleStorageChanges);
         if (enabled) {
@@ -20,9 +19,7 @@ function checkForVideos() {
       }
       updateUnprocessedVideos(videos, enabled);
     });
-  } else if (videoDetected) {
-    // A video was previously detected, but there aren't any now.
-    videoDetected = false;
+  } else if (chrome.storage.onChanged.hasListener(handleStorageChanges)) {
     // No more video: do not react to subsequent storage changes.
     chrome.storage.onChanged.removeListener(handleStorageChanges);
     // Notify background so that tab icon is changed to pause.
