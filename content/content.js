@@ -1,36 +1,37 @@
 var videoDetected = false;
+var videoChecker;
 
 function checkForVideos() {
-	var videos = document.getElementsByTagName("video");
-	if (videos.length > 0) {
-		chrome.storage.local.get("state", function(value) {
-			var enabled = (value["state"] !== "disabled");
-			if (!videoDetected) {
-				// A video was detected, previously none were.
-				videoDetected = true;
-				// Listen to changes to the storage made by the popup.
-				chrome.storage.onChanged.addListener(handleStorageChanges);
-				if (enabled) {
-					// Notify background so that tab icon is changed to play.
-					chrome.runtime.sendMessage({
-						active : true
-					});
-				}
-			}
-			updateUnprocessedVideos(videos, enabled);
-		});
-	} else if (videoDetected) {
-		// A video was previously detected, but there aren't any now.
-		videoDetected = false;
-		// No more video: do not react to subsequent storage changes.
-		chrome.storage.onChanged.removeListener(handleStorageChanges);
-		// Notify background so that tab icon is changed to pause.
-		chrome.runtime.sendMessage({
-			active : false
-		});
-	}
-	// Recursively check for videos in case the page later changes on the fly.
-	setTimeout(checkForVideos, 1000);
+  const videos = document.getElementsByTagName("video");
+  if (videos.length > 0) {
+    chrome.storage.local.get("state", function(value) {
+      const enabled = (value["state"] !== "disabled");
+      if (!videoDetected) {
+        // A video was detected, previously none were.
+        videoDetected = true;
+        // Listen to changes to the storage made by the popup.
+        chrome.storage.onChanged.addListener(handleStorageChanges);
+        if (enabled) {
+          // Notify background so that tab icon is changed to play.
+          chrome.runtime.sendMessage({
+            active : true
+          });
+        }
+      }
+      updateUnprocessedVideos(videos, enabled);
+    });
+  } else if (videoDetected) {
+    // A video was previously detected, but there aren't any now.
+    videoDetected = false;
+    // No more video: do not react to subsequent storage changes.
+    chrome.storage.onChanged.removeListener(handleStorageChanges);
+    // Notify background so that tab icon is changed to pause.
+    chrome.runtime.sendMessage({
+      active : false
+    });
+  }
+  // Recursively check for videos in case the page later changes on the fly.
+  videoChecker = setTimeout(checkForVideos, 1000);
 }
 // Execute first check for videos.
 checkForVideos();
@@ -49,192 +50,181 @@ function updateUnprocessedVideos(videos, enabled) {
 }
 
 function listExtensionVideos() {
-	return Array.prototype.slice.call(document.getElementsByClassName("night_video_tuner"));
+  return Array.prototype.slice.call(document.getElementsByClassName("night_video_tuner"));
 }
 
 function handleStorageChanges(changes) {
-	Object.keys(changes).forEach(function(key) {
-		if (key === "state") {
-			handleStateChange(changes[key].newValue);
-		} else {
-			handleFilterChange(key, changes[key].newValue);
-		}
-	});
+  Object.keys(changes).forEach(function(key) {
+    if (key === "state") {
+      handleStateChange(changes[key].newValue);
+    } else {
+      handleFilterChange(key, changes[key].newValue);
+    }
+  });
 }
 
 function handleStateChange(newState) {
-	if (newState === "disabled") {
-		listExtensionVideos().forEach(function(video) {
-			disableAllVideoFilters(video);
-		});
-		// Notify background so that tab icon is changed to pause.
-		chrome.runtime.sendMessage({
-			active : false
-		});
-	} else {
-		listExtensionVideos().forEach(function(video) {
-			updateAllVideoFilters(video);
-		});
-		// Notify background so that tab icon is changed to play.
-		chrome.runtime.sendMessage({
-			active : true
-		});
-	}
+  const enabled = (newState !== "disabled");
+  if (enabled) {
+    listExtensionVideos().forEach(function(video) {
+      updateAllVideoFilters(video);
+    });
+  } else {
+    listExtensionVideos().forEach(function(video) {
+      disableAllVideoFilters(video);
+    });
+  }
+  // Notify background so that tab icon is changed.
+  chrome.runtime.sendMessage({
+    active : enabled
+  });
 }
 
 function handleFilterChange(key, newValue) {
-	chrome.storage.local.get("state", function(value) {
-		if (value["state"] !== "disabled") {
-			if (key === "temperature") {
-				if (DEFAULT_VALUES[key] !== newValue) {
-					listExtensionVideos().forEach(function(video) {
-						updateVideoTemperature(video, newValue);
-					});
-				} else {
-					listExtensionVideos().forEach(function(video) {
-						// Temperature has default value: remove url filter from
-						// HTML.
-						removeVideoFilter(video, "url");
-					});
-				}
-			} else if (DEFAULT_VALUES[key] !== newValue) {
-				listExtensionVideos().forEach(function(video) {
-					updateVideoFilter(video, key, newValue + FILTERS[key]);
-				});
-
-			} else {
-				listExtensionVideos().forEach(function(video) {
-					// Filter has default value: remove it from HTML.
-					removeVideoFilter(video, key);
-				});
-			}
-		}
-	});
+  chrome.storage.local.get("state", function(value) {
+    if (value["state"] !== "disabled") {
+      const isTemperature = (key === "temperature");
+      if (DEFAULT_VALUES[key] === newValue) {
+        listExtensionVideos().forEach(function(video) {
+          // Filter has default value: remove it from HTML.
+          removeVideoFilter(video, isTemperature ? "url" : key);
+        });
+      } else if (isTemperature) {
+        listExtensionVideos().forEach(function(video) {
+          updateVideoTemperature(video, newValue);
+        });
+      } else {
+        listExtensionVideos().forEach(function(video) {
+          updateVideoFilter(video, key, newValue + FILTERS[key]);
+        });
+      }
+    }
+  });
 }
 
 function disableAllVideoFilters(video) {
-	var svgFilters = document.getElementsByClassName("temperature_svg");
-	// Remove HTML temperature element. At most one element expected.
-	while (svgFilters[0]) {
-		svgFilters[0].parentNode.removeChild(svgFilters[0]);
-	}
-	// Remove filter properties in HTML video element.
-	if (typeof video.style !== "undefined") {
-		video.style.setProperty("filter", "", "");
-	}
+  const svgFilters = document.getElementsByClassName("temperature_svg");
+  // Remove HTML temperature element. At most one element expected.
+  while (svgFilters[0]) {
+    svgFilters[0].parentNode.removeChild(svgFilters[0]);
+  }
+  // Remove filter properties in HTML video element.
+  if (typeof video.style !== "undefined") {
+    video.style.setProperty("filter", "", "");
+  }
 }
 
 function updateAllVideoFilters(video) {
-	if (!video.hasAttribute("style")) {
-		// Prepare style atribute for upcoming population.
-		video.setAttribute("style", "");
-	}
-	// Get all storage elements and match relevant ones with our video filters.
-	chrome.storage.local.get(null, function(value) {
-		Object.keys(FILTERS).forEach(function(filter) {
-			var filterValue = value[filter];
-			// Do not add filter if default value.
-			if (typeof filterValue !== "undefined" && filterValue !== DEFAULT_VALUES[filter]) {
-				if (filter === "temperature") {
-					updateVideoTemperature(video, filterValue);
-				} else {
-					updateVideoFilter(video, filter, filterValue + FILTERS[filter]);
-				}
-			}
-		});
-	});
+  if (!video.hasAttribute("style")) {
+    // Prepare style atribute for upcoming population.
+    video.setAttribute("style", "");
+  }
+  // Get all storage elements and match relevant ones with our video filters.
+  chrome.storage.local.get(null, function(value) {
+    Object.keys(FILTERS).forEach(function(filter) {
+      const filterValue = value[filter];
+      // Do not add filter if default value.
+      if (typeof filterValue !== "undefined" && filterValue !== DEFAULT_VALUES[filter]) {
+        if (filter === "temperature") {
+          updateVideoTemperature(video, filterValue);
+        } else {
+          updateVideoFilter(video, filter, filterValue + FILTERS[filter]);
+        }
+      }
+    });
+  });
 }
 
 function updateVideoFilter(video, filter, value) {
-	var newFilters;
-	if (typeof video.style.filter !== "undefined") {
-		var currentFilters = video.style.filter;
-		var regex = RegExp(filter + "\\(([0-9]*" + FILTERS[filter] + "|\"#temperature_filter\")\\)");
-		if (regex.test(currentFilters)) {
-			// Filter already exists: replace with new value.
-			newFilters = currentFilters.replace(regex, filter + "(" + value + ")");
-		} else {
-			// Filter doesn't exist: append it to existing ones.
-			newFilters = currentFilters + " " + filter + "(" + value + ")";
-		}
-	} else {
-		// No current filters.
-		newFilters = filter + "(" + value + ")";
-	}
-	video.style.setProperty("filter", newFilters, "");
+  let newFilters;
+  if (typeof video.style.filter !== "undefined") {
+    const currentFilters = video.style.filter;
+    const regex = RegExp(filter + "\\(([0-9]*" + FILTERS[filter] + "|\"#temperature_filter\")\\)");
+    if (regex.test(currentFilters)) {
+      // Filter already exists: replace with new value.
+      newFilters = currentFilters.replace(regex, filter + "(" + value + ")");
+    } else {
+      // Filter doesn't exist: append it to existing ones.
+      newFilters = currentFilters + " " + filter + "(" + value + ")";
+    }
+  } else {
+    // No current filters.
+    newFilters = filter + "(" + value + ")";
+  }
+  video.style.setProperty("filter", newFilters, "");
 }
 
 function removeVideoFilter(video, filter) {
-	if (typeof video.style !== "undefined" && typeof video.style.filter !== "undefined") {
-		var currentFilters = video.style.filter;
-		var regex = RegExp(filter + "\\(([0-9]*" + FILTERS[filter] + "|\"#temperature_filter\")\\)");
-		if (regex.test(currentFilters)) {
-			// Filter previously existed: remove it.
-			video.style.setProperty("filter", currentFilters.replace(regex, ""), "");
-		}
-	}
+  if (typeof video.style !== "undefined" && typeof video.style.filter !== "undefined") {
+    const currentFilters = video.style.filter;
+    const regex = RegExp(filter + "\\(([0-9]*" + FILTERS[filter] + "|\"#temperature_filter\")\\)");
+    if (regex.test(currentFilters)) {
+      // Filter previously existed: remove it.
+      video.style.setProperty("filter", currentFilters.replace(regex, ""), "");
+    }
+  }
 }
 
 function updateVideoTemperature(video, value) {
-	var temperature = value / 100;
-	var previousSVGs = document.getElementsByClassName("temperature_svg");
-	// Remove previous HTML temperature element. At most one element expected.
-	while (previousSVGs[0]) {
-		previousSVGs[0].parentNode.removeChild(previousSVGs[0]);
-	}
-	var feColorMatrix = document.createElementNS("http://www.w3.org/2000/svg", "feColorMatrix");
-	feColorMatrix.setAttribute("type", "matrix");
-	// Functions to compute RGB components from a given temperature written
-	// using: www.tannerhelland.com/4435/convert-temperature-rgb-algorithm-code
-	feColorMatrix.setAttribute("values", computeRed(temperature) + " 0 0 0 0 0 " + computeGreen(temperature)
-			+ " 0 0 0 0 0 " + computeBlue(temperature) + " 0 0 0 0 0 1 0");
-	var filter = document.createElementNS("http://www.w3.org/2000/svg", "filter");
-	filter.setAttribute("id", "temperature_filter");
-	filter.setAttribute("color-interpolation-filters", "sRGB");
-	filter.appendChild(feColorMatrix);
-	var newSVG = document.createElementNS("http://www.w3.org/2000/svg", "svg");
-	newSVG.classList.add("temperature_svg");
-	// Workaround to prevent the SVG from interfering with the layout.
-	newSVG.setAttribute("width", "0");
-	newSVG.setAttribute("height", "0");
-	newSVG.setAttribute("style", "position: absolute; left: -999");
-	newSVG.appendChild(filter);
-	// Append HTML temperature element as a child of the video.
-	video.parentNode.appendChild(newSVG);
-	// Update filters so it uses the temperature svg.
-	updateVideoFilter(video, "url", "#temperature_filter");
+  const temperature = value / 100;
+  const previousSVGs = document.getElementsByClassName("temperature_svg");
+  // Remove previous HTML temperature element. At most one element expected.
+  while (previousSVGs[0]) {
+    previousSVGs[0].parentNode.removeChild(previousSVGs[0]);
+  }
+  const feColorMatrix = document.createElementNS("http://www.w3.org/2000/svg", "feColorMatrix");
+  feColorMatrix.setAttribute("type", "matrix");
+  // Functions to compute RGB components from a given temperature written
+  // using: www.tannerhelland.com/4435/convert-temperature-rgb-algorithm-code
+  feColorMatrix.setAttribute("values", computeRed(temperature) + " 0 0 0 0 0 " + computeGreen(temperature)
+      + " 0 0 0 0 0 " + computeBlue(temperature) + " 0 0 0 0 0 1 0");
+  const filter = document.createElementNS("http://www.w3.org/2000/svg", "filter");
+  filter.setAttribute("id", "temperature_filter");
+  filter.setAttribute("color-interpolation-filters", "sRGB");
+  filter.appendChild(feColorMatrix);
+  const newSVG = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+  newSVG.classList.add("temperature_svg");
+  // Workaround to prevent the SVG from interfering with the layout.
+  newSVG.setAttribute("width", "0");
+  newSVG.setAttribute("height", "0");
+  newSVG.setAttribute("style", "position: absolute; left: -999");
+  newSVG.appendChild(filter);
+  // Append HTML temperature element as a child of the video.
+  video.parentNode.appendChild(newSVG);
+  // Update filters so it uses the temperature svg.
+  updateVideoFilter(video, "url", "#temperature_filter");
 }
 
 function computeRed(temperature) {
-	if (temperature <= 66) {
-		return 1;
-	}
-	return normalise(329.698727446 * Math.pow(temperature - 60, -0.1332047592));
+  if (temperature <= 66) {
+    return 1;
+  }
+  return normalise(329.698727446 * Math.pow(temperature - 60, -0.1332047592));
 }
 
 function computeGreen(temperature) {
-	if (temperature <= 66) {
-		return normalise(99.4708025861 * Math.log(temperature) - 161.1195681661);
-	}
-	return normalise(288.1221695283 * Math.pow(temperature - 60, -0.0755148492));
+  if (temperature <= 66) {
+    return normalise(99.4708025861 * Math.log(temperature) - 161.1195681661);
+  }
+  return normalise(288.1221695283 * Math.pow(temperature - 60, -0.0755148492));
 }
 
 function computeBlue(temperature) {
-	if (temperature >= 66) {
-		return 1;
-	}
-	if (temperature <= 19) {
-		return 0;
-	}
-	return normalise(138.5177312231 * Math.log(temperature - 10) - 305.0447927307);
+  if (temperature >= 66) {
+    return 1;
+  }
+  if (temperature <= 19) {
+    return 0;
+  }
+  return normalise(138.5177312231 * Math.log(temperature - 10) - 305.0447927307);
 }
 
 function normalise(temperature) {
-	if (temperature < 0) {
-		return 0;
-	}
-	if (temperature > 255) {
-		return 1;
-	}
-	return temperature / 255;
+  if (temperature < 0) {
+    return 0;
+  }
+  if (temperature > 255) {
+    return 1;
+  }
+  return temperature / 255;
 }

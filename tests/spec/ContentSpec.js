@@ -8,16 +8,20 @@ describe("Content script", function() {
 
   afterEach(function() {
     var svgElements = document.getElementsByTagName("svg");
-    while (svgElements.length > 0) {
-      svgElements[0].remove();
+    while (svgElements[0]) {
+      svgElements[0].parentNode.removeChild(svgElements[0]);
     }
     var extensionVideos = document.getElementsByTagName("video");
-    while (extensionVideos.length > 0) {
-      extensionVideos[0].remove();
+    while (extensionVideos[0]) {
+      extensionVideos[0].parentNode.removeChild(extensionVideos[0]);
     }
   });
 
   describe("Check for videos", function() {
+    afterEach(function() {
+      clearTimeout(videoChecker);
+    });
+  	 
     it("should repeatedly check whether videos have appeared", function(done) {
       spyOn(window, "checkForVideos");
 
