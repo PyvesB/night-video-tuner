@@ -52,6 +52,10 @@ Simply navigate to the ![Chrome](http://images.jupload.fr/1502307545.png) [Chrom
 
 Click on the install button on the top right of the window. The extension will be installed automatically and should not require a browser restart in order to be used.
 
+#### :hammer: Running the tests
+
+If you're a developer, you may be interested in running the tests. Simply clone the respository and open `tests/SpecRunner.html` in your favorite browser! A full report will be generated using Jasmine.
+
 # Contributing
 
 #### `$ code`
