@@ -248,7 +248,7 @@ describe("Content script", function() {
 
       expect(window.updateVideoFilter.calls.mostRecent().args[0]).toEqual(video);
       expect(window.updateVideoFilter.calls.mostRecent().args[1]).toEqual("brightness");
-      expect(window.updateVideoFilter.calls.mostRecent().args[2]).toEqual(101 + FILTERS["brightness"]);
+      expect(window.updateVideoFilter.calls.mostRecent().args[2]).toEqual(`101${FILTERS["brightness"]}`);
     });
 
     it("should remove filter if changed back to default and plugin enabled", function() {

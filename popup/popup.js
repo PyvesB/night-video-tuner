@@ -11,7 +11,7 @@ Object.keys(FILTERS).forEach(function(filter) {
   // Add listener to the filter range input.
   rangeInput.addEventListener("input", updateFilterValue);
   // Add listener to the filter reset button.
-  document.getElementById("reset_" + filter).addEventListener("click", function(e) {
+  document.getElementById(`reset_${filter}`).addEventListener("click", function(e) {
     // Remove "reset_" prefix.
     resetFilter(e.target.id.substring(6));
   });
@@ -21,17 +21,17 @@ Object.keys(FILTERS).forEach(function(filter) {
     // i18n message names don't support hyphens.
     messageName = "hue_rotate";
   }
-  document.getElementById(filter + "_text").appendChild(document.createTextNode(chrome.i18n.getMessage(messageName)));
+  document.getElementById(`${filter}_text`).appendChild(document.createTextNode(chrome.i18n.getMessage(messageName)));
   // Initialise the displayed value.
   chrome.storage.local.get(filter, function(value) {
     const storageValue = value[filter];
     if (typeof storageValue !== "undefined") {
       rangeInput.value = storageValue;
-      const filterVal = document.getElementById(filter + "_val");
+      const filterVal = document.getElementById(`${filter}_val`);
       while (filterVal.firstChild) {
         filterVal.removeChild(filterVal.firstChild);
       }
-      filterVal.appendChild(document.createTextNode(storageValue + FILTERS[filter]));
+      filterVal.appendChild(document.createTextNode(`${storageValue}${FILTERS[filter]}`));
     }
   });
 });
@@ -52,23 +52,23 @@ document.getElementById("reset_all_text").appendChild(document.createTextNode(ch
 document.getElementById("website_text").appendChild(document.createTextNode(chrome.i18n.getMessage("website")));
 document.getElementById("reviews_text").appendChild(document.createTextNode(chrome.i18n.getMessage("reviews")));
 // Display version number.
-document.getElementById("version").appendChild(document.createTextNode("v" + chrome.runtime.getManifest().version));
+document.getElementById("version").appendChild(document.createTextNode(`v${chrome.runtime.getManifest().version}`));
 
 function updateFilterValue() {
   const filter = this.id;
   const newValue = this.value;
-  const filterVal = document.getElementById(filter + "_val");
+  const filterVal = document.getElementById(`${filter}_val`);
   while (filterVal.firstChild) {
     filterVal.removeChild(filterVal.firstChild);
   }
   // Update the displayed value.
-  filterVal.appendChild(document.createTextNode(newValue + FILTERS[filter]));
+  filterVal.appendChild(document.createTextNode(`${newValue}${FILTERS[filter]}`));
   const storageObj = {};
   storageObj[filter] = newValue;
   // Persist the new value to the storage so it is picked up by a tab's
   // content script.
   chrome.storage.local.set(storageObj, function() {
-    console.log("Set value of " + filter + " to " + newValue + FILTERS[filter]);
+    console.log(`Set value of ${filter} to ${newValue}${FILTERS[filter]}`);
   });
 }
 
@@ -82,18 +82,18 @@ function resetFilter(filter) {
   const defaultValue = DEFAULT_VALUES[filter];
   // Update position of the range thumb.
   document.getElementById(filter).value = defaultValue;
-  const filterVal = document.getElementById(filter + "_val");
+  const filterVal = document.getElementById(`${filter}_val`);
   while (filterVal.firstChild) {
     filterVal.removeChild(filterVal.firstChild);
   }
   // Update the displayed value.
-  filterVal.appendChild(document.createTextNode(defaultValue + FILTERS[filter]));
+  filterVal.appendChild(document.createTextNode(`${defaultValue}${FILTERS[filter]}`));
   const storageObj = {};
   storageObj[filter] = defaultValue;
   // Persist the default value to the storage so it is picked up by a tab's
   // content script.
   chrome.storage.local.set(storageObj, function() {
-    console.log("Reset " + filter + " to its default value (" + defaultValue + FILTERS[filter] + ")")
+    console.log(`Reset ${filter} to its default value (${defaultValue}${FILTERS[filter]})`);
   });
 }
 
@@ -113,7 +113,7 @@ function enableDisable() {
       buttonText.appendChild(document.createTextNode(chrome.i18n.getMessage("enable")));
     }
     chrome.storage.local.set(storageObj, function() {
-      console.log("Set global state of extension to " + storageObj["state"]);
+      console.log(`Set global state of extension to ${storageObj["state"]}`);
     });
   });
 }

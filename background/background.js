@@ -13,7 +13,7 @@ chrome.runtime.onInstalled.addListener(function(details) {
       iconUrl : "icons/icon-large.png"
     })
   }
-  console.info("Extension version " + chrome.runtime.getManifest().version + " successfully installed");
+  console.info(`Extension version ${chrome.runtime.getManifest().version} successfully installed`);
 });
 
 // Modifies the tab icon when a tab containing a video notifies the background
@@ -21,7 +21,7 @@ chrome.runtime.onInstalled.addListener(function(details) {
 chrome.runtime.onMessage.addListener(function(request, sender) {
   const iconName = request.active ? "play" : "pause";
   chrome.browserAction.setIcon({
-    path : "icons/icon-" + iconName + ".png",
+    path : `icons/icon-${iconName}.png`,
     tabId : sender.tab.id
   });
 });
@@ -37,7 +37,7 @@ function injectScripts() {
           file : "filters/filters.js"
         }, function() {
           if (typeof chrome.runtime.lastError !== "undefined") {
-            console.warn("Could not execute Night Video Tuner script in tab with url " + tab.url);
+            console.warn(`Could not execute Night Video Tuner script in tab with url ${tab.url}`);
           } else {
             chrome.tabs.executeScript(tab.id, {
               allFrames : true,

@@ -92,7 +92,7 @@ function handleFilterChange(key, newValue) {
         });
       } else {
         listExtensionVideos().forEach(function(video) {
-          updateVideoFilter(video, key, newValue + FILTERS[key]);
+          updateVideoFilter(video, key, `${newValue}${FILTERS[key]}`);
         });
       }
     }
@@ -125,7 +125,7 @@ function updateAllVideoFilters(video) {
         if (filter === "temperature") {
           updateVideoTemperature(video, filterValue);
         } else {
-          updateVideoFilter(video, filter, filterValue + FILTERS[filter]);
+          updateVideoFilter(video, filter, `${filterValue}${FILTERS[filter]}`);
         }
       }
     });
@@ -136,17 +136,17 @@ function updateVideoFilter(video, filter, value) {
   let newFilters;
   if (typeof video.style.filter !== "undefined") {
     const currentFilters = video.style.filter;
-    const regex = RegExp(filter + "\\(([0-9]*" + FILTERS[filter] + "|\"#temperature_filter\")\\)");
+    const regex = RegExp(`${filter}\\(([0-9]*${FILTERS[filter]}|"#temperature_filter")\\)`);
     if (regex.test(currentFilters)) {
       // Filter already exists: replace with new value.
-      newFilters = currentFilters.replace(regex, filter + "(" + value + ")");
+      newFilters = currentFilters.replace(regex, `${filter}(${value})`);
     } else {
       // Filter doesn't exist: append it to existing ones.
-      newFilters = currentFilters + " " + filter + "(" + value + ")";
+      newFilters = `${currentFilters} ${filter}(${value})`;
     }
   } else {
     // No current filters.
-    newFilters = filter + "(" + value + ")";
+    newFilters = `${filter}(${value})`;
   }
   video.style.setProperty("filter", newFilters, "");
 }
@@ -154,7 +154,7 @@ function updateVideoFilter(video, filter, value) {
 function removeVideoFilter(video, filter) {
   if (typeof video.style !== "undefined" && typeof video.style.filter !== "undefined") {
     const currentFilters = video.style.filter;
-    const regex = RegExp(filter + "\\(([0-9]*" + FILTERS[filter] + "|\"#temperature_filter\")\\)");
+    const regex = RegExp(`${filter}\\(([0-9]*${FILTERS[filter]}|"#temperature_filter")\\)`);
     if (regex.test(currentFilters)) {
       // Filter previously existed: remove it.
       video.style.setProperty("filter", currentFilters.replace(regex, ""), "");
@@ -173,8 +173,8 @@ function updateVideoTemperature(video, value) {
   feColorMatrix.setAttribute("type", "matrix");
   // Functions to compute RGB components from a given temperature written
   // using: www.tannerhelland.com/4435/convert-temperature-rgb-algorithm-code
-  feColorMatrix.setAttribute("values", computeRed(temperature) + " 0 0 0 0 0 " + computeGreen(temperature)
-      + " 0 0 0 0 0 " + computeBlue(temperature) + " 0 0 0 0 0 1 0");
+  feColorMatrix.setAttribute("values",
+      `${computeRed(temperature)} 0 0 0 0 0 ${computeGreen(temperature)} 0 0 0 0 0 ${computeBlue(temperature)} 0 0 0 0 0 1 0`);
   const filter = document.createElementNS("http://www.w3.org/2000/svg", "filter");
   filter.setAttribute("id", "temperature_filter");
   filter.setAttribute("color-interpolation-filters", "sRGB");
