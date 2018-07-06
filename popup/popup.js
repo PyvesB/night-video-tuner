@@ -119,7 +119,7 @@ function enableDisable() {
 }
 
 function visitWebsite() {
-  window.open("https://github.com/PyvesB/NightVideoTuner");
+  window.open("https://github.com/PyvesB/night-video-tuner");
 }
 
 function visitReviews() {

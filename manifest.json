@@ -3,7 +3,7 @@
 	"version": "1.0.9",
 	"description": "__MSG_manifest_description__",
 	"author": "PyvesB",
-	"homepage_url": "https://github.com/PyvesB/NightVideoTuner",
+	"homepage_url": "https://github.com/PyvesB/night-video-tuner",
 	"default_locale": "en",
 	"offline_enabled": true,
 	"background": {
