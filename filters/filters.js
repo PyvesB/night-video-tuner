@@ -8,7 +8,8 @@ const FILTERS = {
   "sepia" : "%",
   "blur" : "px",
   "hue-rotate" : "deg",
-  "temperature" : "K"
+  "temperature" : "K",
+  "gamma" : ""
 };
 
 const DEFAULT_VALUES = {
@@ -21,5 +22,6 @@ const DEFAULT_VALUES = {
   "sepia" : "0",
   "blur" : "0",
   "hue-rotate" : "0",
-  "temperature" : "6500"
+  "temperature" : "6500",
+  "gamma" : "1"
 };

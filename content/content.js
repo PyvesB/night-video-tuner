@@ -80,15 +80,18 @@ function handleStateChange(newState) {
 function handleFilterChange(key, newValue) {
   chrome.storage.local.get("state", function(value) {
     if (value["state"] !== "disabled") {
-      const isTemperature = (key === "temperature");
       if (DEFAULT_VALUES[key] === newValue) {
         listExtensionVideos().forEach(function(video) {
           // Filter has default value: remove it from HTML.
-          removeVideoFilter(video, isTemperature ? "url" : key);
+          removeVideoFilter(video, key);
         });
-      } else if (isTemperature) {
+      } else if (key === "temperature") {
         listExtensionVideos().forEach(function(video) {
           updateVideoTemperature(video, newValue);
+        });
+      } else if (key === "gamma") {
+        listExtensionVideos().forEach(function(video) {
+          updateVideoGamma(video, newValue);
         });
       } else {
         listExtensionVideos().forEach(function(video) {
@@ -100,14 +103,19 @@ function handleFilterChange(key, newValue) {
 }
 
 function disableAllVideoFilters(video) {
-  const svgFilters = document.getElementsByClassName("temperature_svg");
-  // Remove HTML temperature element. At most one element expected.
-  while (svgFilters[0]) {
-    svgFilters[0].parentNode.removeChild(svgFilters[0]);
-  }
+  removeSVGElements("temperature_svg");
+  removeSVGElements("gamma_svg");
   // Remove filter properties in HTML video element.
   if (typeof video.style !== "undefined") {
     video.style.setProperty("filter", "", "");
+  }
+}
+
+function removeSVGElements(name) {
+  const svgFilters = document.getElementsByClassName(name);
+  // Remove HTML svg element. At most one element expected.
+  while (svgFilters[0]) {
+    svgFilters[0].parentNode.removeChild(svgFilters[0]);
   }
 }
 
@@ -124,6 +132,8 @@ function updateAllVideoFilters(video) {
       if (typeof filterValue !== "undefined" && filterValue !== DEFAULT_VALUES[filter]) {
         if (filter === "temperature") {
           updateVideoTemperature(video, filterValue);
+        } else if (filter === "gamma") {
+            updateVideoGamma(video, filterValue);
         } else {
           updateVideoFilter(video, filter, `${filterValue}${FILTERS[filter]}`);
         }
@@ -132,29 +142,29 @@ function updateAllVideoFilters(video) {
   });
 }
 
-function updateVideoFilter(video, filter, value) {
+function updateVideoFilter(video, cssName, value) {
   let newFilters;
   if (typeof video.style.filter !== "undefined") {
     const currentFilters = video.style.filter;
-    const regex = RegExp(`${filter}\\(([0-9]*${FILTERS[filter]}|"#temperature_filter")\\)`);
+    const regex = RegExp(`${cssName}\\(([0-9]*${FILTERS[cssName]}|"${value}")\\)`);
     if (regex.test(currentFilters)) {
       // Filter already exists: replace with new value.
-      newFilters = currentFilters.replace(regex, `${filter}(${value})`);
+      newFilters = currentFilters.replace(regex, `${cssName}(${value})`);
     } else {
       // Filter doesn't exist: append it to existing ones.
-      newFilters = `${currentFilters} ${filter}(${value})`;
+      newFilters = `${currentFilters} ${cssName}(${value})`;
     }
   } else {
     // No current filters.
-    newFilters = `${filter}(${value})`;
+    newFilters = `${cssName}(${value})`;
   }
   video.style.setProperty("filter", newFilters, "");
 }
 
-function removeVideoFilter(video, filter) {
+function removeVideoFilter(video, name) {
   if (typeof video.style !== "undefined" && typeof video.style.filter !== "undefined") {
     const currentFilters = video.style.filter;
-    const regex = RegExp(`${filter}\\(([0-9]*${FILTERS[filter]}|"#temperature_filter")\\)`);
+    const regex = RegExp(`${name}\\([0-9]*${FILTERS[name]}\\)|url\\("#${name}_filter"\\)`);
     if (regex.test(currentFilters)) {
       // Filter previously existed: remove it.
       video.style.setProperty("filter", currentFilters.replace(regex, ""), "");
@@ -164,32 +174,13 @@ function removeVideoFilter(video, filter) {
 
 function updateVideoTemperature(video, value) {
   const temperature = value / 100;
-  const previousSVGs = document.getElementsByClassName("temperature_svg");
-  // Remove previous HTML temperature element. At most one element expected.
-  while (previousSVGs[0]) {
-    previousSVGs[0].parentNode.removeChild(previousSVGs[0]);
-  }
   const feColorMatrix = document.createElementNS("http://www.w3.org/2000/svg", "feColorMatrix");
   feColorMatrix.setAttribute("type", "matrix");
   // Functions to compute RGB components from a given temperature written
   // using: www.tannerhelland.com/4435/convert-temperature-rgb-algorithm-code
   feColorMatrix.setAttribute("values",
       `${computeRed(temperature)} 0 0 0 0 0 ${computeGreen(temperature)} 0 0 0 0 0 ${computeBlue(temperature)} 0 0 0 0 0 1 0`);
-  const filter = document.createElementNS("http://www.w3.org/2000/svg", "filter");
-  filter.setAttribute("id", "temperature_filter");
-  filter.setAttribute("color-interpolation-filters", "sRGB");
-  filter.appendChild(feColorMatrix);
-  const newSVG = document.createElementNS("http://www.w3.org/2000/svg", "svg");
-  newSVG.classList.add("temperature_svg");
-  // Workaround to prevent the SVG from interfering with the layout.
-  newSVG.setAttribute("width", "0");
-  newSVG.setAttribute("height", "0");
-  newSVG.setAttribute("style", "position: absolute; left: -999");
-  newSVG.appendChild(filter);
-  // Append HTML temperature element as a child of the video.
-  video.parentNode.appendChild(newSVG);
-  // Update filters so it uses the temperature svg.
-  updateVideoFilter(video, "url", "#temperature_filter");
+  updateSVGFilter(video, feColorMatrix, "temperature");
 }
 
 function computeRed(temperature) {
@@ -224,4 +215,40 @@ function normalise(temperature) {
     return 1;
   }
   return temperature / 255;
+}
+
+function updateVideoGamma(video, value) {
+  const feComponentTransfer = document.createElementNS("http://www.w3.org/2000/svg", "feComponentTransfer");
+  feComponentTransfer.appendChild(buildGammaComponent(value, "feFuncR"));
+  feComponentTransfer.appendChild(buildGammaComponent(value, "feFuncG"));
+  feComponentTransfer.appendChild(buildGammaComponent(value, "feFuncB"));
+  updateSVGFilter(video, feComponentTransfer, "gamma");
+}
+
+function buildGammaComponent(value, name) {
+  const component = document.createElementNS("http://www.w3.org/2000/svg", name);
+  component.setAttribute("type", "gamma");
+  component.setAttribute("offset", "0");
+  component.setAttribute("amplitude", "1");
+  component.setAttribute("exponent", value);
+  return component;
+}
+
+function updateSVGFilter(video, child, name) {
+  removeSVGElements(`${name}_svg`);
+  const filter = document.createElementNS("http://www.w3.org/2000/svg", "filter");
+  filter.setAttribute("id", `${name}_filter`);
+  filter.setAttribute("color-interpolation-filters", "sRGB");
+  filter.appendChild(child);
+  const newSVG = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+  newSVG.classList.add(`${name}_svg`);
+  // Workaround to prevent the SVG from interfering with the layout.
+  newSVG.setAttribute("width", "0");
+  newSVG.setAttribute("height", "0");
+  newSVG.setAttribute("style", "position: absolute; left: -999");
+  newSVG.appendChild(filter);
+  // Append HTML temperature element as a child of the video.
+  video.parentNode.appendChild(newSVG);
+  // Update filters so it uses the temperature svg.
+  updateVideoFilter(video, "url", `#${name}_filter`);
 }

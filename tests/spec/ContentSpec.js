@@ -21,7 +21,7 @@ describe("Content script", function() {
     afterEach(function() {
       clearTimeout(videoChecker);
     });
-  	 
+
     it("should repeatedly check whether videos have appeared", function(done) {
       spyOn(window, "checkForVideos");
 
@@ -85,7 +85,7 @@ describe("Content script", function() {
       expect(window.updateUnprocessedVideos.calls.mostRecent().args[0][0]).toEqual(video);
       expect(window.updateUnprocessedVideos.calls.mostRecent().args[1]).toBeTruthy();
     });
-    
+
     it("should update unprocessed videos but not notify background if some videos were previsouly detected", function() {
       document.body.appendChild(video);
       chrome.storage.onChanged.addListener(handleStorageChanges);
@@ -218,20 +218,20 @@ describe("Content script", function() {
       expect(window.updateVideoTemperature.calls.mostRecent().args[1]).toEqual("1000");
     });
 
-    it("should remove temperature filter if changed back to default and plugin enabled", function() {
+    it("should update gamma if plugin enabled", function() {
       chrome.storage.local.get.withArgs("state").yields({
         state : "enabled"
       });
-      spyOn(window, "removeVideoFilter");
+      spyOn(window, "updateVideoGamma");
 
       handleStorageChanges({
-        temperature : {
-          newValue : DEFAULT_VALUES["temperature"]
+        gamma : {
+          newValue : "1000"
         }
       });
 
-      expect(window.removeVideoFilter.calls.mostRecent().args[0]).toEqual(video);
-      expect(window.removeVideoFilter.calls.mostRecent().args[1]).toEqual("url");
+      expect(window.updateVideoGamma.calls.mostRecent().args[0]).toEqual(video);
+      expect(window.updateVideoGamma.calls.mostRecent().args[1]).toEqual("1000");
     });
 
     it("should update filter if plugin enabled", function() {
@@ -274,11 +274,13 @@ describe("Content script", function() {
       video.setAttribute("style", "filter: brightness(100%);");
       const svgFilter = document.createElement("svg");
       svgFilter.classList.add("temperature_svg");
+      svgFilter.classList.add("gamma_svg");
       document.body.appendChild(svgFilter);
 
       disableAllVideoFilters(video);
 
       expect(document.getElementsByClassName("temperature_svg").length).toEqual(0);
+      expect(document.getElementsByClassName("gamma_svg").length).toEqual(0);
       expect(video.style.filter).toEqual("");
     });
   });
@@ -287,9 +289,11 @@ describe("Content script", function() {
     it("should add missing style attribute and update all filters that have non default value", function() {
       chrome.storage.local.get.yields({
         temperature : "4000",
+        gamma : "2",
         contrast : "100"
       });
       spyOn(window, "updateVideoTemperature");
+      spyOn(window, "updateVideoGamma");
       spyOn(window, "updateVideoFilter");
 
       updateAllVideoFilters(video);
@@ -297,6 +301,8 @@ describe("Content script", function() {
       expect(video.hasAttribute("style")).toBeTruthy();
       expect(window.updateVideoTemperature.calls.mostRecent().args[0]).toEqual(video);
       expect(window.updateVideoTemperature.calls.mostRecent().args[1]).toEqual("4000");
+      expect(window.updateVideoGamma.calls.mostRecent().args[0]).toEqual(video);
+      expect(window.updateVideoGamma.calls.mostRecent().args[1]).toEqual("2");
       expect(window.updateVideoFilter).not.toHaveBeenCalled();
     });
   });
@@ -352,6 +358,25 @@ describe("Content script", function() {
       expect(window.updateVideoFilter.calls.mostRecent().args[2]).toEqual("#temperature_filter");
       expect(document.getElementsByClassName("temperature_svg").length).toEqual(1);
       expect(document.getElementsByTagName("feColorMatrix").length).toEqual(1);
+      expect(document.getElementsByClassName("expect_removed").length).toEqual(0);
+    });
+  });
+
+  describe("Update video gamma", function() {
+    it("should remove previous SVG filter and add new one", function() {
+      document.body.appendChild(video);
+      const svgFilter = document.createElement("svg");
+      svgFilter.classList.add("gamma_svg", "expect_removed");
+      document.body.appendChild(svgFilter);
+      spyOn(window, "updateVideoFilter");
+
+      updateVideoGamma(video, "2");
+
+      expect(window.updateVideoFilter.calls.mostRecent().args[0]).toEqual(video);
+      expect(window.updateVideoFilter.calls.mostRecent().args[1]).toEqual("url");
+      expect(window.updateVideoFilter.calls.mostRecent().args[2]).toEqual("#gamma_filter");
+      expect(document.getElementsByClassName("gamma_svg").length).toEqual(1);
+      expect(document.getElementsByTagName("feComponentTransfer").length).toEqual(1);
       expect(document.getElementsByClassName("expect_removed").length).toEqual(0);
     });
   });

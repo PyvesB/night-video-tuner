@@ -26,6 +26,9 @@
 	"contrast": {
 		"message": " Contraste : "
 	},
+	"gamma": {
+		"message": " Gamma : "
+	},
 	"grayscale": {
 		"message": " Niveaux de gris : "
 	},
