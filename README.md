@@ -5,17 +5,17 @@
 
 # Night Video Tuner 
 
-<a href="https://github.com/PyvesB/NightVideoTuner/blob/master/LICENSE">
-<img src ="https://img.shields.io/github/license/PyvesB/NightVideoTuner.svg" />
+<a href="https://github.com/PyvesB/night-video-tuner/blob/master/LICENSE">
+<img src ="https://img.shields.io/github/license/PyvesB/night-video-tuner.svg" />
 </a>
-  <a href="https://github.com/PyvesB/NightVideoTuner/releases">
-<img src ="https://img.shields.io/github/release/PyvesB/NightVideoTuner.svg" />
+  <a href="https://github.com/PyvesB/night-video-tuner/releases">
+<img src ="https://img.shields.io/github/release/PyvesB/night-video-tuner.svg" />
 </a>
-<a href="https://github.com/PyvesB/NightVideoTuner/issues">
-<img src ="https://img.shields.io/github/issues/PyvesB/NightVideoTuner.svg" />
+<a href="https://github.com/PyvesB/night-video-tuner/issues">
+<img src ="https://img.shields.io/github/issues/PyvesB/night-video-tuner.svg" />
 </a>
-<a href="https://github.com/PyvesB/NightVideoTuner/stargazers">
-<img src ="https://img.shields.io/github/stars/PyvesB/NightVideoTuner.svg" />
+<a href="https://github.com/PyvesB/night-video-tuner/stargazers">
+<img src ="https://img.shields.io/github/stars/PyvesB/night-video-tuner.svg" />
 </a>
 
 **Protect your eyes and improve your sleeping cycles by adjusting video temperature and many other properties!**
@@ -42,7 +42,7 @@
 * Available in English and French.
 * Source code fully available.
 
-Check out what's new in the [latest releases](https://github.com/PyvesB/NightVideoTuner/releases)!
+Check out what's new in the [latest releases](https://github.com/PyvesB/night-video-tuner/releases)!
 
 # Getting started
 
@@ -64,7 +64,7 @@ Want to make Night Video Tuner better, faster, stronger? Contributions are more 
 
 #### :speech_balloon: Support
 
-Thought of a cool idea? Found a problem or need some help? Simply open an [**issue**](https://github.com/PyvesB/NightVideoTuner/issues)!
+Thought of a cool idea? Found a problem or need some help? Simply open an [**issue**](https://github.com/PyvesB/night-video-tuner/issues)!
 
 #### :star: Thanks
 
