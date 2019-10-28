@@ -1,5 +1,5 @@
 <p align="center">
-<img src ="http://images.jupload.fr/1506855988.png" width="50%"/>
+<img src ="https://github.com/PyvesB/night-video-tuner/blob/master/images/banner.png?raw=true" width="50%"/>
 <br/>
 </p>
 
@@ -21,10 +21,10 @@
 **Protect your eyes and improve your sleeping cycles by adjusting video temperature and many other properties!**
 
 <p align="center" style="font-size:5px;">
-<img src ="http://images.jupload.fr/1502032921.png" width="420" />
+<img src ="https://github.com/PyvesB/night-video-tuner/blob/master/images/screenshot1.png?raw=true" width="420" />
 <br />
-<img src ="http://images.jupload.fr/1502032952.png" width="420" />
-<img src ="http://images.jupload.fr/1502032972.png" width="420" />
+<img src ="https://github.com/PyvesB/night-video-tuner/blob/master/images/screenshot2.png?raw=true" width="420" />
+<img src ="https://github.com/PyvesB/night-video-tuner/blob/master/images/screenshot3.png?raw=true" width="420" />
 <br />
 <i><sub>A few examples of the extension being used!</sub></i>
 </p>
@@ -48,7 +48,7 @@ Check out what's new in the [latest releases](https://github.com/PyvesB/night-vi
 
 #### :cd: Extension installation
 
-Simply navigate to the ![Chrome](http://images.jupload.fr/1502307545.png) [Chrome Web Store](https://chrome.google.com/webstore/detail/night-video-tuner/ogffaloegjglncjfehdfplabnoondfjo) if you are using Chrome, to the ![Opera](http://images.jupload.fr/1502307420.png) [Opera Add-Ons Store](https://addons.opera.com/extensions/details/night-video-tuner) if you are using Opera or to the ![Firefox](http://images.jupload.fr/1506028278.png) [Firefox Add-Ons Store](https://addons.mozilla.org/firefox/addon/night-video-tuner) if you are using Firefox. 
+Simply navigate to the ![Chrome](https://github.com/PyvesB/night-video-tuner/blob/master/images/chrome.png?raw=true) [Chrome Web Store](https://chrome.google.com/webstore/detail/night-video-tuner/ogffaloegjglncjfehdfplabnoondfjo) if you are using Chrome, to the ![Opera](https://github.com/PyvesB/night-video-tuner/blob/master/images/opera.png?raw=true) [Opera Add-Ons Store](https://addons.opera.com/extensions/details/night-video-tuner) if you are using Opera or to the ![Firefox](https://github.com/PyvesB/night-video-tuner/blob/master/images/firefox.png?raw=true) [Firefox Add-Ons Store](https://addons.mozilla.org/firefox/addon/night-video-tuner) if you are using Firefox. 
 
 Click on the install button on the top right of the window. The extension will be installed automatically and should not require a browser restart in order to be used.
 
