@@ -45,7 +45,7 @@ Check out what's new in the [latest releases](https://github.com/PyvesB/night-vi
 
 ## :cd: Extension installation
 
-Simply navigate to the ![Chrome](https://github.com/PyvesB/night-video-tuner/blob/master/images/chrome.png?raw=true) [Chrome Web Store](https://chrome.google.com/webstore/detail/night-video-tuner/ogffaloegjglncjfehdfplabnoondfjo) if you are using Chrome, to the ![Opera](https://github.com/PyvesB/night-video-tuner/blob/master/images/opera.png?raw=true) [Opera Add-Ons Store](https://addons.opera.com/extensions/details/night-video-tuner) if you are using Opera or to the ![Firefox](https://github.com/PyvesB/night-video-tuner/blob/master/images/firefox.png?raw=true) [Firefox Add-Ons Store](https://addons.mozilla.org/firefox/addon/night-video-tuner) if you are using Firefox. 
+Simply navigate to the ![Chrome](https://github.com/PyvesB/night-video-tuner/blob/master/images/chrome.png?raw=true) [Chrome Web Store](https://chrome.google.com/webstore/detail/night-video-tuner/ogffaloegjglncjfehdfplabnoondfjo) if you are using Chrome or to the ![Firefox](https://github.com/PyvesB/night-video-tuner/blob/master/images/firefox.png?raw=true) [Firefox Add-Ons Store](https://addons.mozilla.org/firefox/addon/night-video-tuner) if you are using Firefox. 
 
 Click on the install button on the top right of the window. The extension will be installed automatically and should not require a browser restart in order to be used.
 
