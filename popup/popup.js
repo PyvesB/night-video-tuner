@@ -123,9 +123,7 @@ function visitWebsite() {
 }
 
 function visitReviews() {
-  if (!!window.opera || navigator.userAgent.indexOf(' OPR/') >= 0) {
-    window.open("https://addons.opera.com/extensions/details/night-video-tuner");
-  } else if (typeof InstallTrigger !== 'undefined') {
+  if (typeof InstallTrigger !== 'undefined') {
     window.open("https://addons.mozilla.org/firefox/addon/night-video-tuner");
   } else {
     window.open("https://chrome.google.com/webstore/detail/night-video-tuner/ogffaloegjglncjfehdfplabnoondfjo");

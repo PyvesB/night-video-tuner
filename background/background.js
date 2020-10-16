@@ -1,7 +1,7 @@
 // All tabs execute the content scripts and check for videos. This avoids having
 // to reload them or restart the browser. Displays an update notification.
 chrome.runtime.onInstalled.addListener(function(details) {
-  // Firefox automatically injects scripts on install, Chrome and Opera don't.
+  // Firefox automatically injects scripts on install, Chrome doesn't.
   if (typeof InstallTrigger === 'undefined') {
     injectScripts();
   }
