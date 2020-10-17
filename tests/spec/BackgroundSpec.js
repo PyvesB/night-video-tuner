@@ -1,61 +1,23 @@
 describe("Background script", function() {
   describe("On extension installed", function() {
     beforeEach(function() {
-      chrome.notifications.create.flush();
       spyOn(window, "injectScripts");
     });
 
-    it("should inject scripts if not Firefox and notify about update", function() {
+    it("should inject scripts if Chrome", function() {
       InstallTrigger = undefined;
-      chrome.i18n.getMessage.withArgs("update_title").returns("my-title");
-      chrome.runtime.getManifest.returns({
-        version : "1.0.0"
-      });
-      chrome.i18n.getMessage.withArgs("update_message", [ "1.0.0" ]).returns("my-message-1.0.0");
 
-      chrome.runtime.onInstalled.dispatch({
-        reason : "update"
-      });
+      chrome.runtime.onInstalled.dispatch();
 
       expect(window.injectScripts).toHaveBeenCalled();
-      expect(chrome.notifications.create.withArgs("update_notification", {
-        title : "my-title",
-        message : "my-message-1.0.0",
-        type : "basic",
-        iconUrl : "icons/icon-large.png"
-      }).calledOnce).toBeTruthy();
     });
 
-    it("should not inject scripts if Firefox but still notify about update", function() {
+    it("should not inject scripts if Firefox", function() {
       InstallTrigger = "firefox";
-      chrome.i18n.getMessage.withArgs("update_title").returns("my-title");
-      chrome.runtime.getManifest.returns({
-        version : "1.0.0"
-      });
-      chrome.i18n.getMessage.withArgs("update_message", [ "1.0.0" ]).returns("my-message-1.0.0");
 
-      chrome.runtime.onInstalled.dispatch({
-        reason : "update"
-      });
+      chrome.runtime.onInstalled.dispatch();
 
       expect(window.injectScripts).not.toHaveBeenCalled();
-      expect(chrome.notifications.create.withArgs("update_notification", {
-        title : "my-title",
-        message : "my-message-1.0.0",
-        type : "basic",
-        iconUrl : "icons/icon-large.png"
-      }).calledOnce).toBeTruthy();
-    });
-
-    it("should inject scripts but not notify about other reasons", function() {
-      InstallTrigger = undefined;
-
-      chrome.runtime.onInstalled.dispatch({
-        reason : "install"
-      });
-
-      expect(window.injectScripts).toHaveBeenCalled();
-      expect(chrome.notifications.create.notCalled).toBeTruthy();
     });
   });
 

@@ -2,18 +2,6 @@
 	"manifest_description": {
 		"message": "Protégez vos yeux et améliorez vos cycles de sommeil en ajustant la température ainsi que d'autres propriétés de vos vidéos !"
 	},
-	"update_title": {
-		"message": "Mise à jour de Night Video Tuner"
-	},
-	"update_message": {
-		"message": "Extension mise à jour en version $VERSION$",
-		"placeholders": {
-			"version": {
-				"content": "$1",
-				"example": "1.0.0"
-			}
-		}
-	},
 	"adjust_video_properties": {
 		"message": "Réglage des Filtres"
 	},

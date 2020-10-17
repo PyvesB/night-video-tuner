@@ -33,7 +33,6 @@
 	],
 	"permissions": [
 		"storage",
-		"notifications",
 		"tabs",
 		"http://*/*",
 		"https://*/*"
