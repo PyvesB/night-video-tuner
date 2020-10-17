@@ -23,5 +23,5 @@ const DEFAULT_VALUES = {
   "blur" : "0",
   "hue-rotate" : "0",
   "temperature" : "6500",
-  "gamma" : "1"
+  "gamma" : "1.00"
 };

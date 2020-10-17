@@ -56,7 +56,7 @@ document.getElementById("version").appendChild(document.createTextNode(`v${chrom
 
 function updateFilterValue() {
   const filter = this.id;
-  const newValue = this.value;
+  const newValue = filter === "gamma" ? parseFloat(this.value).toFixed(2) : this.value;
   const filterVal = document.getElementById(`${filter}_val`);
   while (filterVal.firstChild) {
     filterVal.removeChild(filterVal.firstChild);
