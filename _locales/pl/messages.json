@@ -1,0 +1,56 @@
+{
+	"manifest_description": {
+		"message": "Ochroń swoje oczy i popraw cykle snu dopasowując temperaturę wideo oraz wiele innych."
+	},
+	"adjust_video_properties": {
+		"message": "Filtry Wideo"
+	},
+	"temperature": {
+		"message": " Temperatura: "
+	},
+	"brightness": {
+		"message": " Jasność: "
+	},
+	"contrast": {
+		"message": " Kontrast: "
+	},
+	"gamma": {
+		"message": " Gamma: "
+	},
+	"grayscale": {
+		"message": " Skala szarości: "
+	},
+	"invert": {
+		"message": " Odwróć: "
+	},
+	"opacity": {
+		"message": " Nieprzezroczystość: "
+	},
+	"saturate": {
+		"message": " Saturacja: "
+	},
+	"sepia": {
+		"message": " Sepia: "
+	},
+	"blur": {
+		"message": " Rozmazanie: "
+	},
+	"hue_rotate": {
+		"message": " Zmiana koloru: "
+	},
+	"disable": {
+		"message": "Wyłącz"
+	},
+	"enable": {
+		"message": "Włącz"
+	},
+	"reset_all": {
+		"message": "Zresetuj Wszystko"
+	},
+	"website": {
+		"message": "Strona Domowa"
+	},
+	"reviews": {
+		"message": "Recenzja"
+	}
+}
