@@ -1,0 +1,56 @@
+{
+	"manifest_description": {
+		"message": "Ochraňte své oči a zlepšete svůj spánkový cyklus přizpůsobením teploty obrazu videa a dalších vlastností!"
+	},
+	"adjust_video_properties": {
+		"message": "Upravit vlastnosti videa"
+	},
+	"temperature": {
+		"message": " Teplota: "
+	},
+	"brightness": {
+		"message": " Jas: "
+	},
+	"contrast": {
+		"message": " Kontrast: "
+	},
+	"gamma": {
+		"message": " Gamma korekce: "
+	},
+	"grayscale": {
+		"message": " Šedotón: "
+	},
+	"invert": {
+		"message": " Invertovat barvy: "
+	},
+	"opacity": {
+		"message": " Průhlednost: "
+	},
+	"saturate": {
+		"message": " Sytost: "
+	},
+	"sepia": {
+		"message": " Sépie: "
+	},
+	"blur": {
+		"message": " Rozmazat: "
+	},
+	"hue_rotate": {
+		"message": " Přebarvit: "
+	},
+	"disable": {
+		"message": "Vypnout"
+	},
+	"enable": {
+		"message": "Zapnout"
+	},
+	"reset_all": {
+		"message": "Resetovat vše"
+	},
+	"website": {
+		"message": "Web"
+	},
+	"reviews": {
+		"message": "Recenze"
+	}
+}

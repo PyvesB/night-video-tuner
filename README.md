@@ -38,7 +38,7 @@
 * Enable, disable and precisely manage filters on the fly.
 * Lightweight and user-friendly interface.
 * Free, no user tracking, no ads.
-* Available in English, French and Polish.
+* Available in English, French, Polish and Czech.
 * Source code fully available.
 
 Check out what's new in the [latest releases](https://github.com/PyvesB/night-video-tuner/releases)!
