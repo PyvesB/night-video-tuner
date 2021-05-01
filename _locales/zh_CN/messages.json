@@ -1,0 +1,56 @@
+{
+	"manifest_description": {
+		"message": "通过改变视频色温以保护视力并改善睡眠周期，同时提供更多其他特性！"
+	},
+	"adjust_video_properties": {
+		"message": "Tune 视频过滤器"
+	},
+	"temperature": {
+		"message": " 色温： "
+	},
+	"brightness": {
+		"message": " 亮度： "
+	},
+	"contrast": {
+		"message": " 对比度： "
+	},
+	"gamma": {
+		"message": " 伽马： "
+	},
+	"grayscale": {
+		"message": " 灰度： "
+	},
+	"invert": {
+		"message": " 反色： "
+	},
+	"opacity": {
+		"message": " 透明度： "
+	},
+	"saturate": {
+		"message": " 饱和度： "
+	},
+	"sepia": {
+		"message": " 棕黑色： "
+	},
+	"blur": {
+		"message": " 模糊： "
+	},
+	"hue_rotate": {
+		"message": " 色调旋转： "
+	},
+	"disable": {
+		"message": "禁用"
+	},
+	"enable": {
+		"message": "启用"
+	},
+	"reset_all": {
+		"message": "重置"
+	},
+	"website": {
+		"message": "主页"
+	},
+	"reviews": {
+		"message": "反馈"
+	}
+}
