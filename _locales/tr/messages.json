@@ -1,0 +1,56 @@
+{
+	"manifest_description": {
+		"message": "Video sıcaklığını ve diğer birçok özelliği ayarlayarak gözlerinizi koruyun ve uyku döngülerinizi iyileştirin!"
+	},
+	"adjust_video_properties": {
+		"message": "Video Filtrelerini Ayarla"
+	},
+	"temperature": {
+		"message": "Sıcaklık:"
+	},
+	"brightness": {
+		"message": "Parlaklık:"
+	},
+	"contrast": {
+		"message": "Zıtlık:"
+	},
+	"gamma": {
+		"message": "Gama:"
+	},
+	"grayscale": {
+		"message": "Gri tonlamalı:"
+	},
+	"invert": {
+		"message": "Ters çevir:"
+	},
+	"opacity": {
+		"message": "Opaklık:"
+	},
+	"saturate": {
+		"message": "Doygun:"
+	},
+	"sepia": {
+		"message": "Sepya:"
+	},
+	"blur": {
+		"message": "Bulanıklık:"
+	},
+	"hue_rotate": {
+		"message": "Ton-döndür:"
+	},
+	"disable": {
+		"message": "Kapalı"
+	},
+	"enable": {
+		"message": "Açık"
+	},
+	"reset_all": {
+		"message": "Hepsini sıfırla"
+	},
+	"website": {
+		"message": "Ana Sayfa"
+	},
+	"reviews": {
+		"message": "Gözden geçir"
+	}
+}
