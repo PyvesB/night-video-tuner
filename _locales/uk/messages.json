@@ -1,0 +1,56 @@
+{
+	"manifest_description": {
+		"message": "Захистіть свої очі та покращте цикли сну, регулюючи температуру відео та багато інших властивостей!"
+	},
+	"adjust_video_properties": {
+		"message": "Налаштуйте відеофільтри"
+	},
+	"temperature": {
+		"message": "Температура:"
+	},
+	"brightness": {
+		"message": "Яскравість:"
+	},
+	"contrast": {
+		"message": "Контраст:"
+	},
+	"gamma": {
+		"message": "Гамма:"
+	},
+	"grayscale": {
+		"message": "Відтінки сірого:"
+	},
+	"invert": {
+		"message": "Інвертувати:"
+	},
+	"opacity": {
+		"message": "Непрозорість:"
+	},
+	"saturate": {
+		"message": "Насиченість:"
+	},
+	"sepia": {
+		"message": "Сепія:"
+	},
+	"blur": {
+		"message": "Розмитість:"
+	},
+	"hue_rotate": {
+		"message": "Обертання відтінку:"
+	},
+	"disable": {
+		"message": "Вимкнути"
+	},
+	"enable": {
+		"message": "Увімкнути"
+	},
+	"reset_all": {
+		"message": "Скинути все"
+	},
+	"website": {
+		"message": "Домашня сторінка"
+	},
+	"reviews": {
+		"message": "Відгуки"
+	}
+}
