@@ -1,0 +1,56 @@
+{
+	"manifest_description": {
+		"message": "Защитите свои глаза и улучшите последующий сон, регулируя температуру видео и многие другие его свойства!"
+	},
+	"adjust_video_properties": {
+		"message": "Настройка видео-фильтров"
+	},
+	"temperature": {
+		"message": "Температура:"
+	},
+	"brightness": {
+		"message": "Яркость:"
+	},
+	"contrast": {
+		"message": "Контрастность:"
+	},
+	"gamma": {
+		"message": "Гамма:"
+	},
+	"grayscale": {
+		"message": "Градация серого:"
+	},
+	"invert": {
+		"message": "Обратить цвета:"
+	},
+	"opacity": {
+		"message": "Непрозрачность:"
+	},
+	"saturate": {
+		"message": "Насыщение:"
+	},
+	"sepia": {
+		"message": "Сепия:"
+	},
+	"blur": {
+		"message": "Размытие:"
+	},
+	"hue_rotate": {
+		"message": "Поворот оттенков:"
+	},
+	"disable": {
+		"message": "Выкл"
+	},
+	"enable": {
+		"message": "Вкл"
+	},
+	"reset_all": {
+		"message": "Сброс"
+	},
+	"website": {
+		"message": "GitHub"
+	},
+	"reviews": {
+		"message": "Обзор"
+	}
+}
