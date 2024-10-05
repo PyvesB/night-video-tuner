@@ -1,0 +1,74 @@
+{
+	"manifest_description": {
+		"message": "Schütze deine Augen und verbessere deinen Schlaf dank Anpassung der Farbtemperatur und vieler anderen Eigenschaften!",
+		"hash": "4d62e79e82932262dd3785b3baf727bd"
+	},
+	"adjust_video_properties": {
+		"message": "Videofilter anpassen",
+		"hash": "cdf667438f03e4fda247f783f52bb092"
+	},
+	"temperature": {
+		"message": "Farbtemperatur:",
+		"hash": "ebe00df20c1d54b7fb325805956146e2"
+	},
+	"brightness": {
+		"message": "Helligkeit:",
+		"hash": "dc56f6989104981a0722e34758affa61"
+	},
+	"contrast": {
+		"message": "Kontrast:",
+		"hash": "a046e2b72780fc4a283c0549ee0ed754"
+	},
+	"gamma": {
+		"message": "Gamma:",
+		"hash": "e1ed4fe7b38c637c7e5bbf91979196c1"
+	},
+	"grayscale": {
+		"message": "Grauskala:",
+		"hash": "3907aab4b3732d88bc554e96e4f79271"
+	},
+	"invert": {
+		"message": "Invertieren:",
+		"hash": "dba640d929240dfbd5cb8eb1a241a781"
+	},
+	"opacity": {
+		"message": "Deckkraft:",
+		"hash": "2c7396c867cc78a032fcc8342e9495b2"
+	},
+	"saturate": {
+		"message": "Farbsättigung:",
+		"hash": "4a69adc70d096d8f3fa9d38c58fb3f82"
+	},
+	"sepia": {
+		"message": "Sepia:",
+		"hash": "5897703dbd790039f8e1d76b2a08e057"
+	},
+	"blur": {
+		"message": "Weichzeichnung:",
+		"hash": "ddf7fa76e46d6d8cc729e0900cb58276"
+	},
+	"hue_rotate": {
+		"message": "Farbton:",
+		"hash": "4f9c2ac93582b3f9047f857d083544f7"
+	},
+	"disable": {
+		"message": "Deaktivieren",
+		"hash": "3cd205f2e4eebe52d3320ae5c75aa53c"
+	},
+	"enable": {
+		"message": "Aktivieren",
+		"hash": "2212934c2b3d751385bf1c26d91172f3"
+	},
+	"reset_all": {
+		"message": "Alles zurücksetzen",
+		"hash": "8350797f71ed4250de7c45db71167892"
+	},
+	"website": {
+		"message": "Startseite",
+		"hash": "dd28097589481b4ec24418789d8782f4"
+	},
+	"reviews": {
+		"message": "Bewerten",
+		"hash": "b0eb80487c618c32ae6bb370df504efd"
+	}
+}
